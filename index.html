@@ -46,6 +46,7 @@
   .slide.panel{background:var(--white);}
   .slide.hero{color:#fff;background:var(--deep);}
   .slide.title{background:#0F5E97 url('capgemini-intro-bg.png') center/cover no-repeat;}
+  .slide.data{background:#0D5A9E url('data-background.png') center/cover no-repeat;}
 
   /* Spade watermark on divider slides */
   .motif{position:absolute;right:-8%;top:-18%;width:660px;height:660px;pointer-events:none;}
@@ -86,9 +87,13 @@
   @keyframes rise{to{opacity:1;transform:none;}}
 
   /* Big stat */
-  .stat{font-size:210px;font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--deep);}
-  .stat-row{display:flex;align-items:baseline;gap:28px;flex-wrap:wrap;}
-  .stat-side{max-width:30ch;}
+  .stat{font-size:250px;font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--deep);}
+  .stat-row{display:flex;align-items:center;gap:44px;flex-wrap:wrap;}
+  .stat-side{max-width:36ch;}
+  .stat-flex{display:flex;align-items:center;justify-content:space-between;gap:60px;padding-right:40px;}
+  .dotgrid{display:grid;grid-template-columns:repeat(10,18px);gap:9px;flex:0 0 auto;}
+  .dotgrid i{width:18px;height:18px;border-radius:50%;background:#E3EAF0;}
+  .dotgrid i.on{background:var(--deep);}
   .stat-side .big{font-size:25px;font-weight:500;color:var(--ink);line-height:1.25;}
   .src{font-size:12.5px;color:var(--muted);margin-top:14px;letter-spacing:.02em;}
   .hero .src{color:rgba(255,255,255,.65);}
@@ -137,17 +142,53 @@
   /* split */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;}
 
+  /* Vector space map */
+  .vecmap{border:1px solid var(--line);background:#fff;padding:12px;}
+  .vecmap svg{width:100%;height:auto;display:block;}
+  .vecmap .grid{stroke:#EAF0F5;stroke-dasharray:4 5;stroke-width:1;}
+  .vecmap .axis{stroke:var(--line);stroke-width:1;}
+  .vecmap .axlbl{font-size:11px;fill:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+  .vecmap .dot{fill:var(--deep);}
+  .vecmap .dot.far{fill:#9DB4C5;}
+  .vecmap .wlbl{font-size:13.5px;fill:var(--ink);font-weight:500;}
+  .vecmap .wlbl.far{fill:var(--muted);}
+  .vecmap .link{stroke:var(--vibrant);stroke-width:1.4;}
+  .vecmap .link.far{stroke:#B9C7D2;stroke-dasharray:5 5;}
+  .vecmap .linklbl{font-size:11px;fill:var(--deep);font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+  .vecmap .linklbl.far{fill:#8AA0B0;}
+  .vecmap svg{cursor:crosshair;}
+  .vecmap .cross{stroke:#7E97A9;stroke-width:1;stroke-dasharray:3 4;pointer-events:none;}
+  .vecmap .tipbox{fill:#0E2C49;opacity:.97;pointer-events:none;}
+  .vecmap .tipk{font-size:12px;fill:#9CC3DC;pointer-events:none;}
+  .vecmap .tipv{font-size:12px;fill:#fff;font-weight:700;pointer-events:none;}
+  .vecmap .word{cursor:pointer;}
+  .vecmap .word:hover .dot{fill:var(--vibrant);}
+  .vecmap .predline{stroke:var(--vibrant);stroke-width:1.6;pointer-events:none;}
+  .vecmap .predlbl{font-size:12.5px;font-weight:700;fill:var(--deep);pointer-events:none;}
+  .vecmap .selring{fill:none;stroke:var(--vibrant);stroke-width:2.5;pointer-events:none;}
+
+  /* Probability bars */
+  .probpanel{border:1px solid var(--line);background:#fff;padding:26px 28px;}
+  .probpanel .plbl{font-size:16.5px;font-weight:500;color:var(--ink);margin-bottom:18px;}
+  .probpanel .bar{margin-bottom:14px;}
+  .probpanel .bar:last-child{margin-bottom:0;}
+  .probpanel .brow{display:flex;justify-content:space-between;font-size:14px;color:var(--ink);margin-bottom:5px;}
+  .probpanel .brow span:last-child{font-weight:700;color:var(--deep);}
+  .probpanel .track{height:10px;background:#EAF0F5;}
+  .probpanel .fill{height:100%;background:var(--deep);}
+  .probpanel .fill.faint{background:#B9C7D2;}
+  .probpanel .note{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--vibrant);margin-top:4px;font-weight:500;}
+
   /* Prompt framework */
-  .pe{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;margin-top:28px;align-items:start;}
-  .pe .labels{display:flex;flex-direction:column;gap:13px;}
-  .pe .labels .row{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line);}
-  .pe .labels .k{font-size:13.5px;font-weight:700;letter-spacing:.1em;color:var(--deep);min-width:108px;}
-  .pe .labels .d{font-size:14.5px;font-weight:300;color:var(--muted);line-height:1.35;}
-  .pe .demo{background:#0E2C49;padding:26px 28px;}
-  .pe .demo .line{display:flex;gap:12px;margin-bottom:12px;font-size:14.5px;line-height:1.4;}
-  .pe .demo .line:last-child{margin-bottom:0;}
-  .pe .demo .tagk{font-weight:700;color:#7FD7F4;min-width:96px;letter-spacing:.04em;}
-  .pe .demo .val{color:#E1ECF5;font-weight:300;}
+  .bigparts{display:flex;flex-direction:column;margin-top:26px;max-width:980px;}
+  .bigparts .row{display:flex;align-items:baseline;gap:30px;padding:16px 0;border-bottom:1px solid var(--line);}
+  .bigparts .k{font-size:29px;font-weight:700;color:var(--deep);min-width:300px;letter-spacing:.03em;}
+  .bigparts .d{font-size:18px;font-weight:300;color:var(--muted);}
+  .promptcard{background:#0E2C49;padding:30px 34px;max-width:1100px;}
+  .promptcard .line{display:flex;gap:18px;margin-bottom:15px;font-size:16.5px;line-height:1.5;}
+  .promptcard .line:last-child{margin-bottom:0;}
+  .promptcard .tagk{font-weight:700;color:#7FD7F4;min-width:140px;letter-spacing:.04em;}
+  .promptcard .val{color:#E1ECF5;font-weight:300;}
 
   /* step-of-4 header */
   .stepflag{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);margin-bottom:8px;}
@@ -221,7 +262,7 @@
   <!-- 2 · INTRODUCTION / INSTRUCTORS -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Welcome</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Introduction</span>
     </div>
     <div class="body">
@@ -257,18 +298,21 @@
   <!-- 3 · BUILDING WITH AI, EFFICIENCY -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Why this matters</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Building with AI</span>
     </div>
     <div class="body">
       <h2 class="r">Now the business builds its own software</h2>
       <div class="underline r"></div>
-      <div class="stat-row" style="margin-top:28px;">
-        <div class="stat r">80%</div>
-        <div class="stat-side r">
-          <div class="big">of the people building apps will sit <span style="color:var(--deep);">outside IT</span> by 2026, up from 60% in 2021.</div>
-          <div class="src">Finance, operations, marketing, building what they need themselves. <br/>Source: Gartner forecast.</div>
+      <div class="stat-flex r" style="margin-top:28px;">
+        <div class="stat-row">
+          <div class="stat">80%</div>
+          <div class="stat-side">
+            <div class="big">of the people building apps will sit <span style="color:var(--deep);">outside IT</span> by 2026, up from 60% in 2021.</div>
+            <div class="src">Finance, operations, marketing, building what they need themselves. <br/>Source: Gartner forecast.</div>
+          </div>
         </div>
+        <div class="dotgrid" id="dotgrid" aria-hidden="true"></div>
       </div>
       <p class="lead r" style="margin-top:22px;">"Submit a ticket and wait six weeks" has become <span class="accent">"describe it and have it today."</span> And with AI, a real build that took ~3 hours now takes ~1.</p>
     </div>
@@ -278,7 +322,7 @@
   <!-- 4 · WHAT IS A PRODUCT -->
   <section class="slide panel">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Foundations &middot; 01</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">The basics</span>
     </div>
     <div class="body">
@@ -286,24 +330,52 @@
         <div>
           <h2 class="r">What is a product?</h2>
           <div class="underline r"></div>
-          <p class="lead r">A product isn't the thing you build, it's <span class="accent">the job it gets done</span> for someone.</p>
+          <p class="lead r">A product is <span class="accent">recurring work, turned into a tool</span>: it packages how your best people do something, so anyone can do it without them.</p>
         </div>
         <div>
-          <p class="pull r">People don't buy a drill.<br/>They buy <b>the hole.</b></p>
+          <p class="pull r">A report answers once.<br/>A product answers <b>every time.</b></p>
           <ul class="points">
-            <li class="r"><span class="tick"></span><span>They "hire" your product for a moment in their life.</span></li>
-            <li class="r"><span class="tick"></span><span>Nail the job, and the features take care of themselves.</span></li>
+            <li class="r"><span class="tick"></span><span>The Monday spreadsheet, the status deck, the email chain: recurring effort, waiting to become a tool.</span></li>
+            <li class="r"><span class="tick"></span><span>Effort is spent once. A product keeps paying, every time it's used.</span></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="foot"><span>Start with the job, not the features</span></div>
+    <div class="foot"><span>Turn recurring work into an asset</span></div>
+  </section>
+
+  <!-- 4b · YOU WILL CRAFT A PRODUCT WITH AI -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">This lab</span>
+    </div>
+    <div class="body">
+      <h2 class="r">You are going to craft a product, <span class="accent">with the assistance of AI</span></h2>
+      <div class="underline r"></div>
+      <p class="lead r">Not learn to code. Not watch a demo. Craft a real product, with AI doing the heavy lifting.</p>
+      <div class="grid g3" style="margin-top:26px;">
+        <div class="card r">
+          <div class="role">You</div><h3>The product owner</h3>
+          <p>The idea, the decisions, the taste. You say what good looks like.</p>
+        </div>
+        <div class="card r">
+          <div class="role">AI</div><h3>The builder</h3>
+          <p>It writes, runs and fixes everything, at the speed of conversation.</p>
+        </div>
+        <div class="card r">
+          <div class="role">Together</div><h3>A working product</h3>
+          <p>From plain words to something real people can click, in one session.</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>You bring the judgment, AI brings the hands</span></div>
   </section>
 
   <!-- 5 · CORE FEATURE -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Foundations &middot; 02</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">The basics</span>
     </div>
     <div class="body">
@@ -324,7 +396,7 @@
   <!-- 6 · IDEA TO CORE FEATURE -->
   <section class="slide panel">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">The method</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Idea &rarr; Plan</span>
     </div>
     <div class="body">
@@ -353,13 +425,13 @@
     </div>
     <div class="body">
       <span class="kicker r">Why build, and why now?</span>
-      <h2 class="r" style="margin-top:12px;">The models can finally build</h2>
+      <h2 class="r" style="margin-top:12px;">The models can finally build, with serious results</h2>
       <ul class="points r" style="margin-top:30px;">
-        <li><span class="tick"></span><span>Top models now solve <b>80%+ of real software tasks</b>, fixing actual bugs in real projects, not toy problems.</span></li>
-        <li><span class="tick"></span><span>On Anthropic's own 2-hour engineering exam, <b>Claude Opus 4.5 beat every human candidate</b> who has ever taken it.</span></li>
-        <li><span class="tick"></span><span>Roughly <b>30% of new code at Microsoft and Google</b> is already written by AI.</span></li>
+        <li><span class="tick"></span><span>At <b>Microsoft and Google, roughly 30% of new code</b> is already written by AI.</span></li>
+        <li><span class="tick"></span><span>At <b>Anthropic and OpenAI</b>, the labs building the AI, top engineers report <b>up to 100% of their code</b> is now AI-written.</span></li>
+        <li><span class="tick"></span><span>In the latest <b>Y Combinator</b> startups, a quarter of the teams had <b>95% of their code written by AI</b>, reaching $10M revenue with fewer than 10 people.</span></li>
       </ul>
-      <p class="src r">Sources: SWE-bench Verified (2025) &middot; Anthropic &middot; Microsoft &amp; Google (CEO statements, 2025).</p>
+      <p class="src r">Sources: Microsoft &amp; Google CEO statements &middot; Fortune (2026) &middot; Y Combinator.</p>
     </div>
     <div class="foot"><span>What was a demo two years ago is production today</span></div>
   </section>
@@ -367,7 +439,7 @@
   <!-- 8 · AGENT vs PRODUCT vs PRODUCT WITH AI -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Get the words right</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Know your tools</span>
     </div>
     <div class="body">
@@ -375,19 +447,19 @@
       <div class="underline r"></div>
       <div class="grid g3" style="margin-top:26px;">
         <div class="card r">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3"/><rect x="4" y="5" width="16" height="12" rx="3"/><path d="M9 11h.01M15 11h.01M8 21l2-4M16 21l-2-4"/></svg></div>
+          <div class="ico" style="width:40px;height:40px;"><img src="codex-icon.png" alt="Codex" style="width:100%;height:100%;display:block;" /></div>
           <div class="role">AI Agent</div><h3>It builds it for you</h3>
           <p>Thinks, decides and acts, writes, runs and fixes the app.</p>
           <div class="ex">Ex: your build assistant.</div>
         </div>
         <div class="card r">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 14h6"/></svg></div>
+          <div class="ico" style="width:56px;height:40px;"><svg viewBox="0 0 50 38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="48" height="36" rx="2.5"/><path d="M1 9h48"/><circle cx="5.5" cy="5" r=".9"/><circle cx="10" cy="5" r=".9"/><circle cx="14.5" cy="5" r=".9"/><path d="M6 15.5h24M6 22h30M6 28.5h20"/><rect x="36" y="13" width="9" height="5" rx="1.2"/></svg></div>
           <div class="role">Product</div><h3>The tool you ship</h3>
           <p>A regular app that does one job well. No AI inside.</p>
           <div class="ex">Ex: a contact tracker.</div>
         </div>
         <div class="card r">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M12 13l1 2 2 .5-1.5 1.5.3 2-1.8-1-1.8 1 .3-2L11 15.5 13 15z"/></svg></div>
+          <div class="ico" style="width:56px;height:40px;"><svg viewBox="0 0 50 38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="48" height="36" rx="2.5"/><path d="M1 9h48"/><circle cx="5.5" cy="5" r=".9"/><circle cx="10" cy="5" r=".9"/><circle cx="14.5" cy="5" r=".9"/><path d="M6 15.5h14M6 22h10"/><path d="M26 14h16a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-4l-4.5 4.5V28H26a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3z"/><path d="M33.5 17.5l1.1 2.3 2.4.5-1.7 1.7.4 2.4-2.2-1.2-2.2 1.2.4-2.4-1.7-1.7 2.4-.5z"/></svg></div>
           <div class="role">Product with AI</div><h3>Smarts inside</h3>
           <p>The same app, plus an AI feature that adds value.</p>
           <div class="ex">Ex: contacts that summarize themselves.</div>
@@ -401,7 +473,7 @@
   <!-- 9 · MEET CODEX -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Your build partner</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Meet Codex</span>
     </div>
     <div class="body">
@@ -422,42 +494,151 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>A tireless engineer, on your terms</span></div>
+    <div class="foot"><span>A tireless engineer, on your terms. Next: what's under the hood</span></div>
+  </section>
+
+  <!-- 10b · HOW LLMS WORK -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Under the hood</span>
+    </div>
+    <div class="body">
+      <div class="split" style="align-items:center;gap:54px;">
+        <div>
+          <h2 class="r">LLMs: How they work</h2>
+          <div class="underline r"></div>
+          <p class="lead r" style="margin-top:16px;">Inside the model, <span class="accent">every word is a point in space</span>. Meaning is geometry: related words sit close together.</p>
+          <ul class="points r" style="margin-top:20px;">
+            <li><span class="tick"></span><span>Your prompt places the model somewhere in that space.</span></li>
+            <li><span class="tick"></span><span>From there it does one thing: <b>predict the next word</b>, again and again.</span></li>
+          </ul>
+          <div class="example-box r" style="margin-top:22px;">
+            <span class="lbl" id="predlbl">Next-word prediction</span>
+            <p id="predtext">"The client signed the ___" &rarr; <b>contract 92%</b> &middot; proposal 7% &middot; croissant 0.01%</p>
+          </div>
+        </div>
+        <div class="r">
+          <div class="vecmap" id="vmap">
+            <svg viewBox="0 0 560 420">
+              <line class="grid" x1="60" y1="90" x2="540" y2="90"/>
+              <line class="grid" x1="60" y1="190" x2="540" y2="190"/>
+              <line class="grid" x1="60" y1="290" x2="540" y2="290"/>
+              <line class="grid" x1="180" y1="20" x2="180" y2="380"/>
+              <line class="grid" x1="320" y1="20" x2="320" y2="380"/>
+              <line class="grid" x1="460" y1="20" x2="460" y2="380"/>
+              <line class="axis" x1="60" y1="20" x2="60" y2="380"/>
+              <line class="axis" x1="60" y1="380" x2="540" y2="380"/>
+              <text class="axlbl" x="300" y="408" text-anchor="middle">dimension 1 &middot; e.g. leisure &#8596; business</text>
+              <text class="axlbl" x="-200" y="40" transform="rotate(-90)" text-anchor="middle">dimension 2 &middot; e.g. casual &#8596; formal</text>
+              <g id="predlines"></g>
+              <g class="word"><circle class="dot" cx="380" cy="95" r="7"/><text class="wlbl" x="380" y="76" text-anchor="middle">client</text></g>
+              <g class="word"><circle class="dot" cx="450" cy="133" r="7"/><text class="wlbl" x="450" y="160" text-anchor="middle">contract</text></g>
+              <g class="word"><circle class="dot" cx="356" cy="156" r="7"/><text class="wlbl" x="340" y="182" text-anchor="middle">delivery</text></g>
+              <g class="word"><circle class="dot" cx="452" cy="68" r="7"/><text class="wlbl" x="452" y="49" text-anchor="middle">revenue</text></g>
+              <g class="word"><circle class="dot" cx="320" cy="92" r="7"/><text class="wlbl" x="304" y="73" text-anchor="middle">strategy</text></g>
+              <g class="word"><circle class="dot far" cx="125" cy="312" r="7"/><text class="wlbl far" x="125" y="340" text-anchor="middle">croissant</text></g>
+              <g class="word"><circle class="dot far" cx="208" cy="345" r="7"/><text class="wlbl far" x="212" y="372" text-anchor="middle">football</text></g>
+              <g class="word"><circle class="dot far" cx="105" cy="248" r="7"/><text class="wlbl far" x="105" y="229" text-anchor="middle">holiday</text></g>
+              <g id="vcross" style="display:none;">
+                <line id="vcx" class="cross" x1="0" y1="20" x2="0" y2="380"/>
+                <line id="vcy" class="cross" x1="60" y1="0" x2="540" y2="0"/>
+                <g id="vtip">
+                  <rect class="tipbox" width="178" height="68" rx="5"/>
+                  <text class="tipk" x="14" y="26">dimension 1</text><text id="vt1" class="tipv" x="164" y="26" text-anchor="end">0.0</text>
+                  <text class="tipk" x="14" y="44">dimension 2</text><text id="vt2" class="tipv" x="164" y="44" text-anchor="end">0.0</text>
+                  <text class="tipk" x="14" y="62">closest word</text><text id="vt3" class="tipv" x="164" y="62" text-anchor="end">client</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="caption">Hover to explore the space. Click a word to see what the model predicts from it. The real space has thousands of dimensions.</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>Every answer is next-word prediction. Next: how to brief it</span></div>
+  </section>
+
+  <!-- 10a · TALK TO IT LIKE AN ENGINEER -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Prompt engineering</span>
+    </div>
+    <div class="body">
+      <h2 class="r">Prompting is delegation</h2>
+      <div class="underline r"></div>
+      <div class="split" style="align-items:start;">
+        <div>
+          <p class="lead r" style="margin-top:14px;">Talk to it the way you'd brief an engineer: <span class="accent">the model performs like the person you brief it to be.</span></p>
+          <ul class="points r" style="margin-top:20px;">
+            <li><span class="tick"></span><span><b>Give it a role.</b> Accuracy measurably improves.</span></li>
+            <li><span class="tick"></span><span><b>Give it context.</b> Up to 2x better results on hard tasks.</span></li>
+            <li><span class="tick"></span><span><b>Give it clarity.</b> Every gap gets filled with a guess.</span></li>
+          </ul>
+          <p class="src r" style="margin-top:16px;">Sources: ExpertPrompting (2023) &middot; EmotionPrompt, Microsoft Research (2023).</p>
+        </div>
+        <div class="r">
+          <div class="example-box" style="margin-top:14px;border-left-color:#C2CCD4;">
+            <span class="lbl">The vague ask</span>
+            <p style="color:var(--muted);">"Make me a dashboard."</p>
+          </div>
+          <div class="example-box" style="margin-top:14px;">
+            <span class="lbl">The clear brief</span>
+            <p>"You're a <b>senior engineer</b>. Our delivery leads lose track of risks in spreadsheets. Build a one-screen cockpit that flags late projects."</p>
+          </div>
+          <p class="takeaway r" style="margin-top:22px;"><b>A complete brief has five parts, next.</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>Clear in, quality out, same as any delegation</span></div>
   </section>
 
   <!-- 10 · PROMPT ENGINEERING -->
   <section class="slide panel">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">The skill that matters</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Prompt engineering</span>
     </div>
     <div class="body">
-      <h2 class="r">How to ask: the 5 parts</h2>
+      <h2 class="r">Prompt Engineering</h2>
       <div class="underline r"></div>
-      <div class="pe">
-        <div class="labels r">
-          <div class="row"><span class="k">ROLE</span><span class="d">who the AI should be</span></div>
-          <div class="row"><span class="k">CONTEXT</span><span class="d">your situation &amp; why</span></div>
-          <div class="row"><span class="k">TASK</span><span class="d">what you want done</span></div>
-          <div class="row"><span class="k">GUIDELINES</span><span class="d">how to do it, style, steps</span></div>
-          <div class="row"><span class="k">CONSTRAINTS</span><span class="d">limits &amp; what to avoid</span></div>
-        </div>
-        <div class="demo r">
-          <div class="line"><span class="tagk">Role</span><span class="val">A senior builder of simple business apps.</span></div>
-          <div class="line"><span class="tagk">Context</span><span class="val">A 6-person firm losing follow-ups in spreadsheets.</span></div>
-          <div class="line"><span class="tagk">Task</span><span class="val">Build an app to add contacts, log calls, flag follow-ups.</span></div>
-          <div class="line"><span class="tagk">Guidelines</span><span class="val">Clean one-screen layout, plain labels, clear buttons.</span></div>
-          <div class="line"><span class="tagk">Constraints</span><span class="val">One page, no logins, nothing IT must maintain.</span></div>
-        </div>
+      <p class="lead r" style="margin-top:14px;">The <span class="accent">golden rule</span>: clearly define the role, the task and the context you give the model.</p>
+      <div class="bigparts r">
+        <div class="row"><span class="k">ROLE</span><span class="d">who the AI should be</span></div>
+        <div class="row"><span class="k">CONTEXT</span><span class="d">your situation &amp; why</span></div>
+        <div class="row"><span class="k">TASK</span><span class="d">what you want done</span></div>
+        <div class="row"><span class="k">GUIDELINES</span><span class="d">how to do it, style, steps</span></div>
+        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">limits &amp; what to avoid</span></div>
       </div>
-      <p class="src r" style="margin-top:18px;">The clearer each part, the better the result, like briefing a brilliant new hire.</p>
+      <p class="src r" style="margin-top:18px;">An established best practice recommended by OpenAI and documented in academic literature. Source: OpenAI prompt engineering guide.</p>
     </div>
-    <div class="foot"><span>Vague requests get vague results</span></div>
+    <div class="foot"><span>Next: the five parts on a real Capgemini example</span></div>
+  </section>
+
+  <!-- 12b · WORKED EXAMPLE -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Worked example</span>
+    </div>
+    <div class="body">
+      <h2 class="r">The brief, in action</h2>
+      <div class="underline r"></div>
+      <p class="lead r" style="margin-top:14px;">One feature for a Capgemini mini CRM: <span class="accent">an AI score that tells account leads who to call next.</span></p>
+      <div class="bigparts r" style="max-width:1240px;">
+        <div class="row"><span class="k">ROLE</span><span class="d">"You are a senior engineer building internal tools at Capgemini."</span></div>
+        <div class="row"><span class="k">CONTEXT</span><span class="d">"Our account leads track client relationships in a mini CRM. Follow-ups slip because nobody knows which account needs attention first."</span></div>
+        <div class="row"><span class="k">TASK</span><span class="d">"Add an AI 'next call' score: rate every account 0 to 100 on follow-up urgency, with a one-line reason."</span></div>
+        <div class="row"><span class="k">GUIDELINES</span><span class="d">"Show the score beside each account, sort the list by urgency, plain business language."</span></div>
+        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">"One screen, use only the data already in the CRM, use the OpenAI key I provided and store it securely."</span></div>
+      </div>
+    </div>
+    <div class="foot"><span>One clear brief, one feature, not the whole system</span></div>
   </section>
 
   <!-- 10 · WHAT WE'LL BUILD -->
-  <section class="slide hero">
-    <div class="motif"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(255,255,255,.06)"/></svg></div>
+  <section class="slide hero data">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">From here on, we build</span>
@@ -473,7 +654,7 @@
   <!-- 11 · HOW TO DEBUG -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">When something breaks</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Debugging</span>
     </div>
     <div class="body">
@@ -492,7 +673,7 @@
   <!-- 12 · THE IQ METHOD -->
   <section class="slide panel">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">How we'll work</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">The IQ method</span>
     </div>
     <div class="body">
@@ -522,7 +703,7 @@
   <!-- 13 · IDEAS -->
   <section class="slide light">
     <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span><span class="kicker">Need a starting point?</span></div>
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Ideas</span>
     </div>
     <div class="body">
@@ -653,7 +834,7 @@
     <div class="foot"><span>Capgemini &times; IQ &middot; AI Product Crafting Lab</span></div>
   </section>
 
-<div class="counter" id="counter">01 / 19</div>
+<div class="counter" id="counter">01 / 23</div>
 <div class="dots" id="dots"></div>
 <div class="ctrl">
   <button class="nav-btn" id="prev" aria-label="Previous">&lsaquo;</button>
@@ -680,6 +861,64 @@
   fit();
 
   slides.forEach((_,idx)=>{const b=document.createElement('button');b.addEventListener('click',()=>go(idx));dotsWrap.appendChild(b);});
+  const dg=document.getElementById('dotgrid');
+  if(dg){for(let k=0;k<100;k++){const s=document.createElement('i');if(k<80)s.className='on';dg.appendChild(s);}}
+
+  // Interactive crosshair on the word-space map
+  const vmap=document.getElementById('vmap');
+  if(vmap){
+    const svg=vmap.querySelector('svg');
+    const cross=document.getElementById('vcross');
+    const cx=document.getElementById('vcx'), cy=document.getElementById('vcy');
+    const tip=document.getElementById('vtip');
+    const t1=document.getElementById('vt1'), t2=document.getElementById('vt2'), t3=document.getElementById('vt3');
+    const words=[
+      {n:'client',x:380,y:95},{n:'contract',x:450,y:133},{n:'delivery',x:356,y:156},
+      {n:'revenue',x:452,y:68},{n:'strategy',x:320,y:92},
+      {n:'croissant',x:125,y:312},{n:'football',x:208,y:345},{n:'holiday',x:105,y:248}
+    ];
+    svg.addEventListener('mousemove',e=>{
+      const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+      if(p.x<60||p.x>540||p.y<20||p.y>380){cross.style.display='none';return;}
+      cross.style.display='';
+      cx.setAttribute('x1',p.x);cx.setAttribute('x2',p.x);
+      cy.setAttribute('y1',p.y);cy.setAttribute('y2',p.y);
+      t1.textContent=((p.x-60)/480*12).toFixed(1);
+      t2.textContent=((380-p.y)/360*9).toFixed(1);
+      let best=words[0],bd=Infinity;
+      for(const w of words){const d=(w.x-p.x)**2+(w.y-p.y)**2;if(d<bd){bd=d;best=w;}}
+      t3.textContent=best.n;
+      const tx=p.x+16>362?p.x-194:p.x+16;
+      const ty=p.y+14>312?p.y-82:p.y+14;
+      tip.setAttribute('transform','translate('+tx+','+ty+')');
+    });
+    svg.addEventListener('mouseleave',()=>{cross.style.display='none';});
+
+    // Click a word: show the model's likeliest next words from there
+    function selectWord(w){
+      const others=words.filter(o=>o!==w)
+        .map(o=>({o,d:Math.hypot(o.x-w.x,o.y-w.y)}))
+        .sort((a,b)=>a.d-b.d).slice(0,3);
+      const raw=others.map(x=>Math.exp(-x.d/90));
+      const sum=raw.reduce((a,b)=>a+b,0);
+      const pct=raw.map(v=>Math.max(1,Math.round(v/sum*92)));
+      let h='<circle class="selring" cx="'+w.x+'" cy="'+w.y+'" r="12"/>';
+      others.forEach((x,i)=>{
+        h+='<line class="predline" x1="'+w.x+'" y1="'+w.y+'" x2="'+x.o.x+'" y2="'+x.o.y+'"/>';
+        h+='<text class="predlbl" x="'+((w.x+x.o.x)/2)+'" y="'+((w.y+x.o.y)/2-7)+'" text-anchor="middle">'+pct[i]+'%</text>';
+      });
+      document.getElementById('predlines').innerHTML=h;
+      document.getElementById('predlbl').textContent='Next-word prediction · from "'+w.n+'"';
+      document.getElementById('predtext').innerHTML='After <b>"'+w.n+'"</b>, the likeliest next words: '+
+        others.map((x,i)=>'<b>'+x.o.n+' '+pct[i]+'%</b>').join(' · ')+', a small chance for everything else.';
+    }
+    svg.addEventListener('click',e=>{
+      const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+      let best=null,bd=Infinity;
+      for(const w of words){const d=Math.hypot(w.x-p.x,w.y-p.y);if(d<bd){bd=d;best=w;}}
+      if(bd<=30)selectWord(best);
+    });
+  }
   const dots=[...dotsWrap.children];
   const pad=n=>String(n).padStart(2,'0');
 
