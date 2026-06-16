@@ -12,25 +12,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --deep:#0070AD;
-    --vibrant:#12ABDB;
-    --ink:#1B2530;
-    --muted:#5C6B78;
-    --panel:#F6F8FA;
-    --line:#DCE3E9;
+    --deep:#f97316;       /* IQ brand orange (was Capgemini blue) */
+    --vibrant:#fb923c;    /* orange-400 accent */
+    --ink:#ffffff;        /* primary text on dark canvas */
+    --muted:#9ca3af;      /* gray-400 secondary text */
+    --panel:#111827;      /* gray-900 surface */
+    --line:#1f2937;       /* gray-800 border */
     --white:#fff;
+    --grad:linear-gradient(90deg,#fb923c 0%,#ea580c 100%); /* IQ signature gradient */
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
   body{
     font-family:'Ubuntu',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
-    background:#0B1F30;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;
+    background:#000;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased;
   }
 
   /* The deck is a fixed 1440x900 landscape canvas. It always keeps that ideal
      format and is scaled uniformly to fit any screen (letterboxed), so on a
      phone it just shrinks, never reflows or rotates. */
-  #stage{position:fixed;inset:0;overflow:hidden;background:#0B1F30;display:flex;align-items:center;justify-content:center;}
+  #stage{position:fixed;inset:0;overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;}
   .deck{position:relative;flex:0 0 auto;width:1440px;height:900px;transform:scale(var(--s,1));transform-origin:center center;}
   .slide{
     position:absolute;inset:0;display:flex;flex-direction:column;
@@ -42,11 +43,11 @@
   .slide.active{opacity:1;visibility:visible;transform:none;z-index:2;}
   .slide.prev{transform:translateX(-34px);}
 
-  .slide.light{background:var(--white);}
-  .slide.panel{background:var(--white);}
-  .slide.hero{color:#fff;background:var(--deep);}
-  .slide.title{background:#0F5E97 url('capgemini-intro-bg.png') center/cover no-repeat;}
-  .slide.data{background:#0D5A9E url('data-background.png') center/cover no-repeat;}
+  .slide.light{background:transparent;}
+  .slide.panel{background:transparent;}
+  .slide.hero{color:#fff;background:transparent;}
+  .slide.title{background:#000 url('capgemini-intro-bg.png') center/cover no-repeat;}
+  .slide.data{background:transparent;}
 
   /* Spade watermark on divider slides */
   .motif{position:absolute;right:-8%;top:-18%;width:660px;height:660px;pointer-events:none;}
@@ -57,25 +58,25 @@
   .top{display:flex;align-items:center;justify-content:space-between;flex:0 0 auto;z-index:3;padding-bottom:20px;border-bottom:1px solid var(--line);}
   .hero .top{border-bottom-color:rgba(255,255,255,.3);}
   .brand{display:flex;align-items:center;gap:18px;}
-  .logo-chip{background:#fff;border:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:16px;}
+  .logo-chip{background:#fff;border:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:16px;border-radius:8px;}
   .hero .logo-chip{border-color:#fff;}
   .logo-chip .cap{height:30px;display:block;}
   .logo-chip .iq{height:28px;display:block;}
   .logo-chip .divider{width:1px;height:28px;background:var(--line);flex:0 0 auto;}
   .kicker{font-size:11.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
   .hero .kicker{color:rgba(255,255,255,.85);}
-  .tag{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--line);color:var(--muted);}
+  .tag{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--line);color:var(--muted);border-radius:9999px;}
   .hero .tag{border-color:rgba(255,255,255,.45);color:#fff;}
 
   /* Body */
   .body{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;min-height:0;z-index:3;}
   h1{font-size:76px;font-weight:700;line-height:1.04;letter-spacing:-.02em;}
   h2{font-size:47px;font-weight:500;line-height:1.1;letter-spacing:-.015em;max-width:24ch;}
-  .underline{width:56px;height:3px;background:var(--deep);margin:20px 0 4px;}
+  .underline{width:56px;height:3px;background:var(--grad);border-radius:2px;margin:20px 0 4px;}
   .lead{font-size:21px;font-weight:300;line-height:1.55;color:var(--muted);max-width:52ch;margin-top:20px;}
   .hero .lead{color:rgba(255,255,255,.88);}
   .accent{color:var(--deep);font-weight:500;}
-  .hero .accent{color:#A9E0F6;font-weight:500;}
+  .hero .accent{color:#fdba74;font-weight:500;}
 
   /* reveal */
   .r{opacity:0;transform:translateY(16px);}
@@ -86,13 +87,20 @@
   .active .r:nth-child(7){animation-delay:.41s}
   @keyframes rise{to{opacity:1;transform:none;}}
 
+  /* IQ signature blob field — floating blurred orange/yellow glows on black */
+  .bgfield{position:absolute;inset:0;overflow:hidden;z-index:0;background:#000;pointer-events:none;}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);will-change:transform;}
+  @keyframes iq-float-slow{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-30px) scale(1.08);}}
+  @keyframes iq-float-medium{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,25px) scale(1.12);}}
+  @keyframes iq-float-reverse{0%,100%{transform:translate(0,0) scale(1.05);}50%{transform:translate(-45px,-20px) scale(0.95);}}
+
   /* Big stat */
   .stat{font-size:250px;font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--deep);}
   .stat-row{display:flex;align-items:center;gap:44px;flex-wrap:wrap;}
   .stat-side{max-width:36ch;}
   .stat-flex{display:flex;align-items:center;justify-content:space-between;gap:60px;padding-right:40px;}
   .dotgrid{display:grid;grid-template-columns:repeat(10,18px);gap:9px;flex:0 0 auto;}
-  .dotgrid i{width:18px;height:18px;border-radius:50%;background:#E3EAF0;}
+  .dotgrid i{width:18px;height:18px;border-radius:50%;background:#374151;}
   .dotgrid i.on{background:var(--deep);}
   .stat-side .big{font-size:25px;font-weight:500;color:var(--ink);line-height:1.25;}
   .src{font-size:12.5px;color:var(--muted);margin-top:14px;letter-spacing:.02em;}
@@ -119,8 +127,8 @@
   .g2{grid-template-columns:repeat(2,1fr);}
   .g3{grid-template-columns:repeat(3,1fr);}
   .g4{grid-template-columns:repeat(4,1fr);}
-  .card{background:#fff;border:1px solid var(--line);padding:26px 24px;}
-  .panel .card{background:#fff;}
+  .card{background:var(--panel);border:1px solid var(--line);padding:26px 24px;border-radius:12px;}
+  .panel .card{background:var(--panel);}
   .card .ico{width:36px;height:36px;color:var(--deep);margin-bottom:16px;}
   .card .ico svg{width:100%;height:100%;}
   .card h3{font-size:18px;font-weight:500;margin-bottom:8px;color:var(--ink);}
@@ -130,11 +138,11 @@
 
   /* Method steps */
   .steps{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
-  .stepcard{flex:1 1 0;min-width:160px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--deep);padding:22px 20px;position:relative;}
+  .stepcard{flex:1 1 0;min-width:160px;background:#1f2937;border:1px solid #1f2937;border-top:3px solid var(--deep);padding:22px 20px;position:relative;border-radius:10px;}
   .stepcard .n{font-size:12.5px;font-weight:700;letter-spacing:.16em;color:var(--deep);}
   .stepcard h3{font-size:17px;font-weight:500;margin:9px 0 0;line-height:1.3;color:var(--ink);}
-  .example-box{margin-top:24px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--deep);padding:18px 22px;max-width:62ch;}
-  .light .example-box{background:var(--panel);}
+  .example-box{margin-top:24px;background:#1f2937;border:1px solid #1f2937;border-left:3px solid var(--deep);padding:18px 22px;max-width:62ch;border-radius:10px;}
+  .light .example-box{background:#1f2937;}
   .example-box .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;}
   .example-box p{font-size:18px;font-weight:300;color:var(--ink);margin-top:6px;line-height:1.4;}
   .example-box b{font-weight:500;color:var(--deep);}
@@ -143,15 +151,15 @@
   .split{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center;}
 
   /* Vector space map */
-  .vecmap{border:1px solid var(--line);background:#fff;padding:12px;}
+  .vecmap{border:1px solid #DCE3E9;background:#fff;padding:12px;}
   .vecmap svg{width:100%;height:auto;display:block;}
   .vecmap .grid{stroke:#EAF0F5;stroke-dasharray:4 5;stroke-width:1;}
-  .vecmap .axis{stroke:var(--line);stroke-width:1;}
-  .vecmap .axlbl{font-size:11px;fill:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+  .vecmap .axis{stroke:#DCE3E9;stroke-width:1;}
+  .vecmap .axlbl{font-size:11px;fill:#5C6B78;letter-spacing:.08em;text-transform:uppercase;}
   .vecmap .dot{fill:var(--deep);}
   .vecmap .dot.far{fill:#9DB4C5;}
-  .vecmap .wlbl{font-size:13.5px;fill:var(--ink);font-weight:500;}
-  .vecmap .wlbl.far{fill:var(--muted);}
+  .vecmap .wlbl{font-size:13.5px;fill:#1B2530;font-weight:500;}
+  .vecmap .wlbl.far{fill:#5C6B78;}
   .vecmap .link{stroke:var(--vibrant);stroke-width:1.4;}
   .vecmap .link.far{stroke:#B9C7D2;stroke-dasharray:5 5;}
   .vecmap .linklbl{font-size:11px;fill:var(--deep);font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
@@ -168,15 +176,15 @@
   .vecmap .selring{fill:none;stroke:var(--vibrant);stroke-width:2.5;pointer-events:none;}
 
   /* Probability bars */
-  .probpanel{border:1px solid var(--line);background:#fff;padding:26px 28px;}
+  .probpanel{border:1px solid var(--line);background:var(--panel);padding:26px 28px;border-radius:12px;}
   .probpanel .plbl{font-size:16.5px;font-weight:500;color:var(--ink);margin-bottom:18px;}
   .probpanel .bar{margin-bottom:14px;}
   .probpanel .bar:last-child{margin-bottom:0;}
   .probpanel .brow{display:flex;justify-content:space-between;font-size:14px;color:var(--ink);margin-bottom:5px;}
   .probpanel .brow span:last-child{font-weight:700;color:var(--deep);}
-  .probpanel .track{height:10px;background:#EAF0F5;}
+  .probpanel .track{height:10px;background:#1f2937;}
   .probpanel .fill{height:100%;background:var(--deep);}
-  .probpanel .fill.faint{background:#B9C7D2;}
+  .probpanel .fill.faint{background:#4b5563;}
   .probpanel .note{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--vibrant);margin-top:4px;font-weight:500;}
 
   /* Prompt framework */
@@ -184,10 +192,10 @@
   .bigparts .row{display:flex;align-items:baseline;gap:30px;padding:16px 0;border-bottom:1px solid var(--line);}
   .bigparts .k{font-size:29px;font-weight:700;color:var(--deep);min-width:300px;letter-spacing:.03em;}
   .bigparts .d{font-size:18px;font-weight:300;color:var(--muted);}
-  .promptcard{background:#0E2C49;padding:30px 34px;max-width:1100px;}
+  .promptcard{background:var(--panel);border:1px solid var(--line);padding:30px 34px;max-width:1100px;border-radius:12px;}
   .promptcard .line{display:flex;gap:18px;margin-bottom:15px;font-size:16.5px;line-height:1.5;}
   .promptcard .line:last-child{margin-bottom:0;}
-  .promptcard .tagk{font-weight:700;color:#7FD7F4;min-width:140px;letter-spacing:.04em;}
+  .promptcard .tagk{font-weight:700;color:#fdba74;min-width:140px;letter-spacing:.04em;}
   .promptcard .val{color:#E1ECF5;font-weight:300;}
 
   /* step-of-4 header */
@@ -196,21 +204,21 @@
   .stepflag .bar{width:34px;height:3px;background:var(--deep);}
   .hero .stepflag .bar{background:#fff;}
   .challenge{margin-top:26px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);padding:20px 24px;max-width:58ch;}
-  .light .challenge,.panel .challenge{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--deep);}
+  .light .challenge,.panel .challenge{background:#1f2937;border:1px solid #1f2937;border-left:3px solid var(--deep);border-radius:10px;}
   .challenge .ct{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--deep);}
-  .hero .challenge .ct{color:#A9E0F6;}
+  .hero .challenge .ct{color:#fdba74;}
   .challenge p{font-size:20px;font-weight:300;line-height:1.45;margin-top:8px;}
   .hero .challenge p{color:rgba(255,255,255,.92);}
 
   /* chips */
   .chips{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;}
-  .chip{display:flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(255,255,255,.5);padding:11px 20px;font-size:15px;font-weight:400;color:#fff;}
-  .chip .num{font-weight:700;color:#A9E0F6;}
+  .chip{display:flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(255,255,255,.5);padding:11px 20px;font-size:15px;font-weight:400;color:#fff;border-radius:9999px;}
+  .chip .num{font-weight:700;color:#fdba74;}
 
   /* instructors */
   .people{display:flex;flex-direction:column;gap:18px;margin-top:30px;}
   .person{display:flex;flex-direction:row;align-items:center;gap:16px;}
-  .avatar{flex:0 0 auto;width:74px;height:74px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;overflow:hidden;}
+  .avatar{flex:0 0 auto;width:74px;height:74px;background:#1f2937;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;overflow:hidden;border-radius:12px;}
   .avatar img{width:100%;height:100%;object-fit:cover;object-position:center 25%;}
   .person .pname{font-size:19px;font-weight:500;color:var(--ink);}
   .person .prole{font-size:13.5px;color:var(--muted);margin-top:2px;}
@@ -219,7 +227,7 @@
   .takeaway b{color:var(--deep);font-weight:500;}
 
   /* Image frames */
-  .shot{overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .shot{overflow:hidden;border:1px solid var(--line);background:var(--panel);border-radius:12px;}
   .hero .shot{border-color:rgba(255,255,255,.5);}
   .shot img{width:100%;display:block;}
   .caption{font-size:12.5px;color:var(--muted);margin-top:12px;letter-spacing:.02em;}
@@ -231,11 +239,11 @@
 
   /* controls */
   .ctrl{position:absolute;bottom:22px;right:26px;display:flex;gap:8px;z-index:50;}
-  .nav-btn{width:42px;height:42px;border:1px solid var(--line);cursor:pointer;background:#fff;color:var(--deep);font-size:19px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
-  .nav-btn:hover{background:var(--panel);}
+  .nav-btn{width:42px;height:42px;border:1px solid var(--line);cursor:pointer;background:var(--panel);color:var(--vibrant);font-size:19px;display:flex;align-items:center;justify-content:center;transition:background .15s;border-radius:9999px;}
+  .nav-btn:hover{background:#1f2937;}
   .nav-btn:disabled{opacity:.32;cursor:default;}
   .counter{position:absolute;bottom:30px;left:26px;z-index:50;font-size:12.5px;font-weight:500;letter-spacing:.1em;}
-  .progress{position:absolute;top:0;left:0;height:3px;z-index:60;background:var(--vibrant);width:0;transition:width .45s ease;}
+  .progress{position:absolute;top:0;left:0;height:3px;z-index:60;background:var(--grad);width:0;transition:width .45s ease;}
   .dots{position:absolute;bottom:31px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:50;}
   .dots button{width:16px;height:3px;border:none;padding:0;cursor:pointer;background:rgba(120,150,180,.45);transition:all .2s;}
   .dots button.on{background:var(--vibrant);width:26px;}
@@ -244,6 +252,14 @@
 <body>
 <div id="stage">
 <div class="deck" id="deck">
+<div class="bgfield" aria-hidden="true">
+  <div class="blob" style="top:72px;left:172px;width:360px;height:360px;background:radial-gradient(circle,rgba(251,146,60,.28),rgba(234,88,12,.08));animation:20s ease-in-out infinite iq-float-slow;"></div>
+  <div class="blob" style="top:495px;left:905px;width:420px;height:420px;background:radial-gradient(circle,rgba(249,115,22,.22),rgba(251,146,60,.05));animation:25s ease-in-out infinite iq-float-reverse;"></div>
+  <div class="blob" style="top:512px;left:259px;width:280px;height:280px;background:radial-gradient(circle,rgba(253,186,116,.2),rgba(0,0,0,0));animation:15s ease-in-out infinite iq-float-medium;"></div>
+  <div class="blob" style="top:270px;left:691px;width:320px;height:320px;background:radial-gradient(circle,rgba(250,204,21,.14),rgba(0,0,0,0));animation:22s ease-in-out infinite reverse iq-float-slow;"></div>
+  <div class="blob" style="top:45px;left:923px;width:200px;height:200px;background:radial-gradient(circle,rgba(251,146,60,.18),rgba(0,0,0,0));animation:12s ease-in-out infinite iq-float-medium;"></div>
+  <div class="blob" style="top:345px;left:552px;width:240px;height:240px;background:radial-gradient(circle,rgba(234,88,12,.15),rgba(0,0,0,0));animation:18s ease-in-out infinite iq-float-slow;"></div>
+</div>
 <div class="progress" id="progress"></div>
 
   <!-- 1 · TITLE -->
@@ -418,7 +434,7 @@
 
   <!-- 7 · WHY BUILD, WHY NOW -->
   <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(255,255,255,.06)"/></svg></div>
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Why now</span>
@@ -722,7 +738,7 @@
 
   <!-- 14 · LET'S BUILD -->
   <section class="slide hero">
-    <div class="motif"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(255,255,255,.06)"/></svg></div>
+    <div class="motif"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Your turn</span>
@@ -816,7 +832,7 @@
 
   <!-- 18 · STEP 4 -->
   <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(255,255,255,.06)"/></svg></div>
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Build &middot; Step 4 of 4</span>
@@ -928,7 +944,7 @@
     progress.style.width=((i+1)/total*100)+'%';
     counter.textContent=pad(i+1)+' / '+pad(total);
     prevBtn.disabled=i===0;nextBtn.disabled=i===total-1;
-    counter.style.color=slides[i].classList.contains('hero')?'rgba(255,255,255,.6)':'rgba(20,60,100,.5)';
+    counter.style.color=slides[i].classList.contains('hero')?'rgba(255,255,255,.6)':'rgba(148,163,184,.75)';
   }
   function go(n){i=Math.max(0,Math.min(total-1,n));render();}
   const next=()=>go(i+1), prev=()=>go(i-1);
