@@ -257,6 +257,14 @@
   .vecmap .predline{stroke:var(--vibrant);stroke-width:1.6;pointer-events:none;}
   .vecmap .predlbl{font-size:12.5px;font-weight:700;fill:var(--deep);pointer-events:none;}
   .vecmap .selring{fill:none;stroke:var(--vibrant);stroke-width:2.5;pointer-events:none;}
+  /* Graph focus mode — swoops to centre in 3D, then settles flat & enlarged */
+  .vecmap{position:relative;z-index:1;transform-origin:center center;backface-visibility:hidden;
+    transition:transform .62s cubic-bezier(.16,.84,.44,1), box-shadow .55s ease, border-color .55s ease;}
+  .vecmap.focused{z-index:60;border-color:var(--vibrant);
+    box-shadow:0 60px 120px -34px rgba(8,40,73,.55), 0 26px 54px -36px rgba(0,0,0,.5);}
+  .slide.graphfocus .split>div:first-child{opacity:.08;filter:blur(2px);pointer-events:none;
+    transition:opacity .5s ease, filter .5s ease;}
+  .slide.graphfocus .caption{opacity:0;transition:opacity .4s ease;}
 
   /* Probability bars */
   .probpanel{border:1px solid var(--line);background:var(--panel);padding:26px 28px;border-radius:12px;}
@@ -625,7 +633,7 @@
           </ul>
           <div class="example-box r" style="margin-top:22px;">
             <span class="lbl" id="predlbl">Next-word prediction</span>
-            <p id="predtext">"The client signed the ___" &rarr; <b>contract 92%</b> &middot; proposal 7% &middot; croissant 0.01%</p>
+            <p id="predtext">"The client signed the ___" &rarr; <b>contract 92%</b> &middot; proposal 7% &middot; bicycle 0.01%</p>
           </div>
         </div>
         <div class="r">
@@ -647,7 +655,8 @@
               <g class="word"><circle class="dot" cx="356" cy="156" r="7"/><text class="wlbl" x="340" y="182" text-anchor="middle">delivery</text></g>
               <g class="word"><circle class="dot" cx="452" cy="68" r="7"/><text class="wlbl" x="452" y="49" text-anchor="middle">revenue</text></g>
               <g class="word"><circle class="dot" cx="320" cy="92" r="7"/><text class="wlbl" x="304" y="73" text-anchor="middle">strategy</text></g>
-              <g class="word"><circle class="dot far" cx="125" cy="312" r="7"/><text class="wlbl far" x="125" y="340" text-anchor="middle">croissant</text></g>
+              <g class="word"><circle class="dot" cx="355" cy="200" r="7"/><text class="wlbl" x="355" y="227" text-anchor="middle">R&amp;D</text></g>
+              <g class="word"><circle class="dot far" cx="125" cy="312" r="7"/><text class="wlbl far" x="125" y="340" text-anchor="middle">bicycle</text></g>
               <g class="word"><circle class="dot far" cx="208" cy="345" r="7"/><text class="wlbl far" x="212" y="372" text-anchor="middle">football</text></g>
               <g class="word"><circle class="dot far" cx="105" cy="248" r="7"/><text class="wlbl far" x="105" y="229" text-anchor="middle">holiday</text></g>
               <g id="vcross" style="display:none;">
@@ -716,7 +725,7 @@
       <div class="brief2 r">
         <div class="row"><span class="k">ROLE</span><span class="d">&ldquo;You are a senior engineer building internal tools at Capgemini.&rdquo;</span></div>
         <div class="row"><span class="k">CONTEXT</span><span class="d">&ldquo;Our account leads track client relationships in a mini CRM. Follow-ups slip because nobody knows which account needs attention first.&rdquo;</span></div>
-        <div class="row"><span class="k">TASK</span><span class="d">&ldquo;Add an AI &lsquo;next call&rsquo; score: rate every account 0 to 100 on follow-up urgency, with a one-line reason.&rdquo;</span></div>
+        <div class="row"><span class="k">TASK</span><span class="d">&ldquo;Give each account a 0&ndash;100 score for who to call next, with a one-line reason.&rdquo;</span></div>
         <div class="row"><span class="k">GUIDELINES</span><span class="d">&ldquo;Show the score beside each account, sort the list by urgency, plain business language.&rdquo;</span></div>
         <div class="row"><span class="k">CONSTRAINTS</span><span class="d">&ldquo;One screen, use only the data already in the CRM, use the key I provided and store it securely.&rdquo;</span></div>
       </div>
@@ -1176,11 +1185,17 @@
     const t1=document.getElementById('vt1'), t2=document.getElementById('vt2'), t3=document.getElementById('vt3');
     const words=[
       {n:'client',x:380,y:95},{n:'contract',x:450,y:133},{n:'delivery',x:356,y:156},
-      {n:'revenue',x:452,y:68},{n:'strategy',x:320,y:92},
-      {n:'croissant',x:125,y:312},{n:'football',x:208,y:345},{n:'holiday',x:105,y:248}
+      {n:'revenue',x:452,y:68},{n:'strategy',x:320,y:92},{n:'R&D',x:355,y:200},
+      {n:'bicycle',x:125,y:312},{n:'football',x:208,y:345},{n:'holiday',x:105,y:248}
     ];
+    // Map cursor → SVG user units via the rendered box, so it stays accurate
+    // under the deck's CSS scale() (getScreenCTM ignores that transform in Chrome).
+    function svgPt(e){
+      const r=svg.getBoundingClientRect();
+      return {x:(e.clientX-r.left)/r.width*560, y:(e.clientY-r.top)/r.height*420};
+    }
     svg.addEventListener('mousemove',e=>{
-      const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+      const p=svgPt(e);
       if(p.x<60||p.x>540||p.y<20||p.y>380){cross.style.display='none';return;}
       cross.style.display='';
       cx.setAttribute('x1',p.x);cx.setAttribute('x2',p.x);
@@ -1215,7 +1230,7 @@
         others.map((x,i)=>'<b>'+x.o.n+' '+pct[i]+'%</b>').join(' · ')+', a small chance for everything else.';
     }
     svg.addEventListener('click',e=>{
-      const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());
+      const p=svgPt(e);
       let best=null,bd=Infinity;
       for(const w of words){const d=Math.hypot(w.x-p.x,w.y-p.y);if(d<bd){bd=d;best=w;}}
       if(bd<=30)selectWord(best);
@@ -1275,15 +1290,56 @@
     });
     if(briefHint) briefHint.style.opacity = bStep>=BRIEF_MAX ? '0' : '1';
   }
+  // Interactive "How LLMs work" — first click swoops the graph to centre in 3D,
+  // overlaying the text; it settles flat & enlarged. Next click advances the deck.
+  const vmapEl=document.getElementById('vmap');
+  const llmIdx=[...slides].findIndex(s=>s.querySelector('#vmap'));
+  let llmFocus=false, llmSettle=null;
+  function centerGraph(on){
+    if(!vmapEl||llmIdx<0) return;
+    clearTimeout(llmSettle);
+    const slide=slides[llmIdx];
+    if(on){
+      const dRect=deck.getBoundingClientRect(), vRect=vmapEl.getBoundingClientRect();
+      const s=parseFloat(getComputedStyle(deck).getPropertyValue('--s'))||1;
+      const dx=((dRect.left+dRect.width/2)-(vRect.left+vRect.width/2))/s;
+      const dy=((dRect.top+dRect.height/2)-(vRect.top+vRect.height/2))/s;
+      slide.classList.add('graphfocus');
+      vmapEl.classList.add('focused');
+      // Phase A: 3D swoop into the centre
+      vmapEl.style.transform='translate('+dx+'px,'+dy+'px) perspective(1500px) rotateX(15deg) rotateY(-18deg) scale(1.46)';
+      // Phase B: settle flat so the graph stays readable and cursor-accurate
+      llmSettle=setTimeout(function(){
+        vmapEl.style.transform='translate('+dx+'px,'+dy+'px) scale(1.5)';
+      },560);
+    } else {
+      slide.classList.remove('graphfocus');
+      vmapEl.classList.remove('focused');
+      vmapEl.style.transform='';
+    }
+  }
   function go(n){
     const pv=i;
     i=Math.max(0,Math.min(total-1,n));
     if(i===briefIdx && pv!==briefIdx){ bStep = pv>i ? BRIEF_MAX : 0; }
+    if(pv===llmIdx && i!==llmIdx){ llmFocus=false; centerGraph(false); }
+    if(i===llmIdx && pv!==llmIdx){
+      if(pv>i){ llmFocus=true; clearTimeout(llmSettle); llmSettle=setTimeout(function(){ if(llmFocus&&i===llmIdx) centerGraph(true); },480); }
+      else { llmFocus=false; centerGraph(false); }
+    }
     render();
     if(i===briefIdx) briefShow();
   }
-  function next(){ if(i===briefIdx && bStep<BRIEF_MAX){ bStep++; briefShow(); return; } go(i+1); }
-  function prev(){ if(i===briefIdx && bStep>0){ bStep--; briefShow(); return; } go(i-1); }
+  function next(){
+    if(i===briefIdx && bStep<BRIEF_MAX){ bStep++; briefShow(); return; }
+    if(i===llmIdx && !llmFocus){ llmFocus=true; centerGraph(true); return; }
+    go(i+1);
+  }
+  function prev(){
+    if(i===briefIdx && bStep>0){ bStep--; briefShow(); return; }
+    if(i===llmIdx && llmFocus){ llmFocus=false; centerGraph(false); return; }
+    go(i-1);
+  }
   nextBtn.addEventListener('click',next);
   prevBtn.addEventListener('click',prev);
   // Robust key handling for presenter remotes (Norwii, Logitech, etc.)
