@@ -265,6 +265,10 @@
   .slide.graphfocus .split>div:first-child{opacity:.08;filter:blur(2px);pointer-events:none;
     transition:opacity .5s ease, filter .5s ease;}
   .slide.graphfocus .caption{opacity:0;transition:opacity .4s ease;}
+  /* Full-bleed vector-space image slide */
+  .vspace{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;}
+  .vspace img{max-width:min(1080px,94%);max-height:680px;object-fit:contain;border-radius:16px;
+    background:#fff;box-shadow:0 36px 90px -34px rgba(0,0,0,.6), 0 14px 40px -30px rgba(0,0,0,.5);}
 
   /* Probability bars */
   .probpanel{border:1px solid var(--line);background:var(--panel);padding:26px 28px;border-radius:12px;}
@@ -676,6 +680,17 @@
       </div>
     </div>
     <div class="foot"><span>Every answer is next-word prediction. Next: how to brief it</span></div>
+  </section>
+
+  <!-- 10b-ii · VECTOR SPACE (image only) -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Under the hood</span>
+    </div>
+    <div class="body">
+      <div class="vspace r"><img src="vectorspace.png" alt="A vector space of word embeddings" /></div>
+    </div>
   </section>
 
   <!-- 10a · TALK TO IT LIKE AN ENGINEER -->
