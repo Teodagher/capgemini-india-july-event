@@ -200,6 +200,69 @@
   .tl-face img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:center 22%;border:2px solid rgba(255,255,255,.22);}
   .tl-face span{font-size:12.5px;color:#d1d5db;text-align:center;line-height:1.2;}
 
+  /* "Craft a product" — You + AI merge into a Product Craftsman (plays on slide enter) */
+  .merge{position:relative;height:300px;display:flex;align-items:center;justify-content:center;margin-top:24px;}
+  .m-pair{display:flex;align-items:center;justify-content:center;gap:96px;}
+  .m-node{display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .m-node svg{width:94px;height:94px;}
+  .m-node .nm{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .m-node .sub{font-size:15px;color:var(--fg2,#d1d5db);font-weight:300;}
+  .m-you svg{stroke:#fff;}
+  .m-ai svg{stroke:var(--vibrant);}
+  .m-plus{font-size:44px;font-weight:200;color:var(--muted);}
+  .m-craft{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.5);opacity:0;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+  .m-craft svg{width:122px;height:122px;stroke:#fff;color:var(--vibrant);}
+  .m-craft .nm{font-size:23px;font-weight:700;color:#fff;letter-spacing:.01em;text-transform:none;}
+  .m-craft .sub{font-size:15px;color:var(--muted);}
+  .craft-slide.merged .m-you{animation:youMerge 2.6s cubic-bezier(.16,.84,.44,1) forwards;}
+  .craft-slide.merged .m-ai{animation:aiMerge 2.6s cubic-bezier(.16,.84,.44,1) forwards;}
+  .craft-slide.merged .m-plus{animation:plusFade 2.6s ease forwards;}
+  .craft-slide.merged .m-craft{animation:craftIn 2.6s cubic-bezier(.16,.84,.44,1) forwards;}
+  @keyframes youMerge{0%,24%{opacity:1;transform:translateX(0) scale(1);}58%{opacity:1;transform:translateX(120px) scale(.82);}72%,100%{opacity:0;transform:translateX(135px) scale(.5);}}
+  @keyframes aiMerge{0%,24%{opacity:1;transform:translateX(0) scale(1);}58%{opacity:1;transform:translateX(-120px) scale(.82);}72%,100%{opacity:0;transform:translateX(-135px) scale(.5);}}
+  @keyframes plusFade{0%,18%{opacity:1;}40%,100%{opacity:0;}}
+  @keyframes craftIn{0%,60%{opacity:0;transform:translate(-50%,-50%) scale(.5);}82%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}100%{opacity:1;transform:translate(-50%,-50%) scale(1);}}
+
+  /* "From promise to feature" — clean 3-step flow */
+  .flow3{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:40px;}
+  .fnode{flex:0 1 280px;background:#111827;border:1px solid var(--line);border-radius:14px;padding:28px 22px;text-align:center;}
+  .fnode .fk{font-size:23px;font-weight:700;color:#fff;letter-spacing:-.01em;}
+  .fnode .fs{font-size:14px;color:var(--muted);margin-top:8px;font-weight:300;}
+  .fnode.hl{background:rgba(249,115,22,.12);border-color:var(--deep);}
+  .fnode.hl .fk{color:#fb923c;}
+  .farrow{color:var(--deep);font-size:32px;flex:0 0 auto;font-weight:300;}
+  .ex-line{text-align:center;max-width:none;color:var(--muted);font-size:16.5px;font-weight:300;margin-top:38px;}
+  .ex-line b{color:var(--fg2,#d1d5db);font-weight:600;}
+
+  /* "Ideas to spark you" — polished idea cards */
+  /* "Ideas to spark you" — 3D flip cards, revealed one per click */
+  .ideas2{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:42px;}
+  .ic{position:relative;height:316px;perspective:1300px;transition:opacity .4s ease;}
+  .ic-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,.15,.2,1);}
+  .ic-face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:18px;border:1px solid var(--line);background:#111827;padding:26px 22px;display:flex;flex-direction:column;overflow:hidden;}
+  .ic-front{align-items:center;justify-content:center;text-align:center;}
+  .ic-front .ibadge{width:60px;height:60px;border-radius:15px;background:rgba(249,115,22,.14);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+  .ic-front .ibadge svg{width:30px;height:30px;stroke:var(--vibrant);}
+  .ic-front h3{font-size:23px;font-weight:600;color:#fff;}
+  .ic-front .hintp{font-size:13px;color:var(--muted);margin-top:12px;letter-spacing:.04em;}
+  .ic-back{transform:rotateY(180deg);background:linear-gradient(160deg,#15233a,#0e1521);border-color:rgba(249,115,22,.55);justify-content:center;}
+  .ic-back h3{font-size:22px;font-weight:700;color:#fb923c;margin-bottom:20px;}
+  .ic-back ul{list-style:none;display:flex;flex-direction:column;gap:15px;}
+  .ic-back li{position:relative;padding-left:22px;font-size:17px;line-height:1.35;color:#e7ecf1;font-weight:400;}
+  .ic-back li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--vibrant);}
+  .ic.open{z-index:6;}
+  .ic.open .ic-inner{transform:rotateY(180deg);}
+  .ideas2.stepping .ic:not(.open){opacity:.45;}
+
+  /* With / without AI comparison */
+  .compare{display:flex;flex-direction:column;gap:20px;max-width:960px;margin:40px auto 0;width:100%;}
+  .crow{display:flex;align-items:center;gap:26px;padding:28px 32px;border-radius:16px;border:1px solid var(--line);background:#111827;}
+  .crow .clbl{flex:0 0 132px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .crow .ctext{font-size:22px;font-weight:300;color:#fff;line-height:1.34;}
+  .crow.hl{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.5);}
+  .crow.hl .clbl{color:#fb923c;}
+  .crow.hl .ctext b{color:#fb923c;font-weight:600;}
+
   /* Big stat */
   .stat{font-size:250px;font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--deep);}
   .stat-row{display:flex;align-items:center;gap:44px;flex-wrap:wrap;}
@@ -458,7 +521,6 @@
           <div class="stat">80%</div>
           <div class="stat-side">
             <div class="big">of the people building apps will sit <span style="color:var(--deep);">outside IT</span> by 2026, up from 60% in 2021.</div>
-            <div class="src">Finance, operations, marketing, building what they need themselves. <br/>Source: Gartner forecast.</div>
           </div>
         </div>
         <div class="dotgrid" id="dotgrid" aria-hidden="true"></div>
@@ -474,47 +536,37 @@
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">The basics</span>
     </div>
-    <div class="body">
-      <div class="split">
-        <div>
-          <h2 class="r">What is a product?</h2>
-          <div class="underline r"></div>
-          <p class="lead r">A product is <span class="accent">recurring work, turned into a tool</span>: it packages how your best people do something, so anyone can do it without them.</p>
-        </div>
-        <div>
-          <p class="pull r">A report answers once.<br/>A product answers <b>every time.</b></p>
-          <ul class="points">
-            <li class="r"><span class="tick"></span><span>The Monday spreadsheet, the status deck, the email chain: recurring effort, waiting to become a tool.</span></li>
-            <li class="r"><span class="tick"></span><span>Effort is spent once. A product keeps paying, every time it's used.</span></li>
-          </ul>
-        </div>
-      </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <h2 class="r" style="max-width:none;">What is a product?</h2>
+      <div class="underline r" style="margin:18px auto 0;"></div>
+      <p class="pull r" style="text-align:center;max-width:24ch;margin:34px auto 0;font-size:44px;">A report answers once.<br/>A product answers <b>every time.</b></p>
     </div>
     <div class="foot"><span>Turn recurring work into an asset</span></div>
   </section>
 
   <!-- 4b · YOU WILL CRAFT A PRODUCT WITH AI -->
-  <section class="slide light">
+  <section class="slide light craft-slide">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">This lab</span>
     </div>
-    <div class="body">
-      <h2 class="r">You are going to craft a product, <span class="accent">with the assistance of AI</span></h2>
-      <div class="underline r"></div>
-      <p class="lead r">Not learn to code. Not watch a demo. Craft a real product, with AI doing the heavy lifting.</p>
-      <div class="grid g3" style="margin-top:26px;">
-        <div class="card r">
-          <div class="role">You</div><h3>The product owner</h3>
-          <p>The idea, the decisions, the taste. You say what good looks like.</p>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <h2 class="r" style="max-width:none;">You are going to craft a product, <span class="accent">with the assistance of AI</span></h2>
+      <div class="merge r">
+        <div class="m-pair">
+          <div class="m-node m-you">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <div class="nm">You</div><div class="sub">The vision</div>
+          </div>
+          <div class="m-plus">+</div>
+          <div class="m-node m-ai">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/><path d="M13.5 4l-3 16"/></svg>
+            <div class="nm">The Developer</div><div class="sub">The builder</div>
+          </div>
         </div>
-        <div class="card r">
-          <div class="role">AI</div><h3>The builder</h3>
-          <p>It writes, runs and fixes everything, at the speed of conversation.</p>
-        </div>
-        <div class="card r">
-          <div class="role">Together</div><h3>A working product</h3>
-          <p>From plain words to something real people can click, in one session.</p>
+        <div class="m-node m-craft">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="8" r="4"/><path d="M3 21c0-4 3.4-7 7.5-7c1 0 2 .15 2.9.45"/><path d="M18 12.5l1.3 2.9 2.9 1.3-2.9 1.3L18 20.9l-1.3-2.9-2.9-1.3 2.9-1.3z" fill="currentColor" stroke="none"/></svg>
+          <div class="nm">Product Craftsman</div><div class="sub">You + the developer, as one</div>
         </div>
       </div>
     </div>
@@ -548,75 +600,19 @@
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Idea &rarr; Plan</span>
     </div>
-    <div class="body">
-      <h2 class="r">From promise to feature</h2>
-      <div class="underline r"></div>
-      <div class="steps">
-        <div class="stepcard r"><div class="n">STEP 1</div><h3>Name the promise<br/><span style="color:var(--muted);font-weight:300;font-size:14px;">the value proposition</span></h3></div>
-        <div class="stepcard r"><div class="n">STEP 2</div><h3>Ask: what one action delivers it?</h3></div>
-        <div class="stepcard r"><div class="n">STEP 3</div><h3>That action is your core feature</h3></div>
-        <div class="stepcard r"><div class="n">STEP 4</div><h3>Build its smallest version</h3></div>
+    <div class="body" style="justify-content:center;">
+      <h2 class="r" style="text-align:center;max-width:none;">From promise to feature</h2>
+      <div class="underline r" style="margin:18px auto 0;"></div>
+      <div class="flow3 r">
+        <div class="fnode"><div class="fk">A promise</div><div class="fs">what it swears to do</div></div>
+        <div class="farrow">&rarr;</div>
+        <div class="fnode"><div class="fk">One action</div><div class="fs">that delivers it</div></div>
+        <div class="farrow">&rarr;</div>
+        <div class="fnode hl"><div class="fk">Core feature</div><div class="fs">build only this, first</div></div>
       </div>
-      <div class="example-box r">
-        <span class="lbl">Worked example</span>
-        <p>Promise: <b>"I never lose track of a client."</b> &rarr; One action: save a contact and instantly see all my notes on them. &rarr; That's the core feature. Build only that first.</p>
-      </div>
+      <p class="ex-line r">e.g. &ldquo;I never lose track of a client&rdquo; &rarr; save a contact &amp; see every note &rarr; <b>that's the feature.</b></p>
     </div>
     <div class="foot"><span>One promise &rarr; one action &rarr; one feature</span></div>
-  </section>
-
-  <!-- 7 · WHY BUILD, WHY NOW -->
-  <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Why now</span>
-    </div>
-    <div class="body">
-      <span class="kicker r">Why build, and why now?</span>
-      <h2 class="r" style="margin-top:12px;">The models can finally build, with serious results</h2>
-      <ul class="points r" style="margin-top:30px;">
-        <li><span class="tick"></span><span>At <b>Microsoft and Google, roughly 30% of new code</b> is already written by AI.</span></li>
-        <li><span class="tick"></span><span>At <b>Anthropic and OpenAI</b>, the labs building the AI, top engineers report <b>up to 100% of their code</b> is now AI-written.</span></li>
-        <li><span class="tick"></span><span>In the latest <b>Y Combinator</b> startups, a quarter of the teams had <b>95% of their code written by AI</b>, reaching $10M revenue with fewer than 10 people.</span></li>
-      </ul>
-      <p class="src r">Sources: Microsoft &amp; Google CEO statements &middot; Fortune (2026) &middot; Y Combinator.</p>
-    </div>
-    <div class="foot"><span>What was a demo two years ago is production today</span></div>
-  </section>
-
-  <!-- 8 · AGENT vs PRODUCT vs PRODUCT WITH AI -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Know your tools</span>
-    </div>
-    <div class="body">
-      <h2 class="r">Agent &middot; Product &middot; Product&#8209;with&#8209;AI</h2>
-      <div class="underline r"></div>
-      <div class="grid g3" style="margin-top:26px;">
-        <div class="card r">
-          <div class="ico" style="width:40px;height:40px;"><img src="codex-icon.png" alt="Codex" style="width:100%;height:100%;display:block;" /></div>
-          <div class="role">AI Agent</div><h3>It builds it for you</h3>
-          <p>Thinks, decides and acts, writes, runs and fixes the app.</p>
-          <div class="ex">Ex: your build assistant.</div>
-        </div>
-        <div class="card r">
-          <div class="ico" style="width:56px;height:40px;"><svg viewBox="0 0 50 38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="48" height="36" rx="2.5"/><path d="M1 9h48"/><circle cx="5.5" cy="5" r=".9"/><circle cx="10" cy="5" r=".9"/><circle cx="14.5" cy="5" r=".9"/><path d="M6 15.5h24M6 22h30M6 28.5h20"/><rect x="36" y="13" width="9" height="5" rx="1.2"/></svg></div>
-          <div class="role">Product</div><h3>The tool you ship</h3>
-          <p>A regular app that does one job well. No AI inside.</p>
-          <div class="ex">Ex: a contact tracker.</div>
-        </div>
-        <div class="card r">
-          <div class="ico" style="width:56px;height:40px;"><svg viewBox="0 0 50 38" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="48" height="36" rx="2.5"/><path d="M1 9h48"/><circle cx="5.5" cy="5" r=".9"/><circle cx="10" cy="5" r=".9"/><circle cx="14.5" cy="5" r=".9"/><path d="M6 15.5h14M6 22h10"/><path d="M26 14h16a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-4l-4.5 4.5V28H26a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3z"/><path d="M33.5 17.5l1.1 2.3 2.4.5-1.7 1.7.4 2.4-2.2-1.2-2.2 1.2.4-2.4-1.7-1.7 2.4-.5z"/></svg></div>
-          <div class="role">Product with AI</div><h3>Smarts inside</h3>
-          <p>The same app, plus an AI feature that adds value.</p>
-          <div class="ex">Ex: contacts that summarize themselves.</div>
-        </div>
-      </div>
-      <p class="takeaway r" style="margin-top:24px;"><b>The agent is your builder. The product is what gets built. AI inside is optional.</b></p>
-    </div>
-    <div class="foot"><span>The builder, the built, and the optional brains inside</span></div>
   </section>
 
   <!-- 9 · MEET CODEX -->
@@ -646,111 +642,16 @@
     <div class="foot"><span>A tireless engineer, on your terms. Next: what's under the hood</span></div>
   </section>
 
-  <!-- 10b · HOW LLMS WORK -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Under the hood</span>
-    </div>
-    <div class="body">
-      <div class="split" style="align-items:center;gap:54px;">
-        <div>
-          <h2 class="r">LLMs: How they work</h2>
-          <div class="underline r"></div>
-          <p class="lead r" style="margin-top:16px;">Inside the model, <span class="accent">every word is a point in space</span>. Meaning is geometry: related words sit close together.</p>
-          <ul class="points r" style="margin-top:20px;">
-            <li><span class="tick"></span><span>Your prompt places the model somewhere in that space.</span></li>
-            <li><span class="tick"></span><span>From there it does one thing: <b>predict the next word</b>, again and again.</span></li>
-          </ul>
-          <div class="example-box r" style="margin-top:22px;">
-            <span class="lbl" id="predlbl">Next-word prediction</span>
-            <p id="predtext">"The client signed the ___" &rarr; <b>contract 92%</b> &middot; proposal 7% &middot; bicycle 0.01%</p>
-          </div>
-        </div>
-        <div class="r">
-          <div class="vecmap" id="vmap">
-            <svg viewBox="0 0 560 420">
-              <line class="grid" x1="60" y1="90" x2="540" y2="90"/>
-              <line class="grid" x1="60" y1="190" x2="540" y2="190"/>
-              <line class="grid" x1="60" y1="290" x2="540" y2="290"/>
-              <line class="grid" x1="180" y1="20" x2="180" y2="380"/>
-              <line class="grid" x1="320" y1="20" x2="320" y2="380"/>
-              <line class="grid" x1="460" y1="20" x2="460" y2="380"/>
-              <line class="axis" x1="60" y1="20" x2="60" y2="380"/>
-              <line class="axis" x1="60" y1="380" x2="540" y2="380"/>
-              <text class="axlbl" x="300" y="408" text-anchor="middle">dimension 1 &middot; e.g. leisure &#8596; business</text>
-              <text class="axlbl" x="-200" y="40" transform="rotate(-90)" text-anchor="middle">dimension 2 &middot; e.g. casual &#8596; formal</text>
-              <g id="predlines"></g>
-              <g class="word"><circle class="dot" cx="380" cy="95" r="7"/><text class="wlbl" x="380" y="76" text-anchor="middle">client</text></g>
-              <g class="word"><circle class="dot" cx="450" cy="133" r="7"/><text class="wlbl" x="450" y="160" text-anchor="middle">contract</text></g>
-              <g class="word"><circle class="dot" cx="356" cy="156" r="7"/><text class="wlbl" x="340" y="182" text-anchor="middle">delivery</text></g>
-              <g class="word"><circle class="dot" cx="452" cy="68" r="7"/><text class="wlbl" x="452" y="49" text-anchor="middle">revenue</text></g>
-              <g class="word"><circle class="dot" cx="320" cy="92" r="7"/><text class="wlbl" x="304" y="73" text-anchor="middle">strategy</text></g>
-              <g class="word"><circle class="dot" cx="355" cy="200" r="7"/><text class="wlbl" x="355" y="227" text-anchor="middle">R&amp;D</text></g>
-              <g class="word"><circle class="dot far" cx="125" cy="312" r="7"/><text class="wlbl far" x="125" y="340" text-anchor="middle">bicycle</text></g>
-              <g class="word"><circle class="dot far" cx="208" cy="345" r="7"/><text class="wlbl far" x="212" y="372" text-anchor="middle">football</text></g>
-              <g class="word"><circle class="dot far" cx="105" cy="248" r="7"/><text class="wlbl far" x="105" y="229" text-anchor="middle">holiday</text></g>
-              <g id="vcross" style="display:none;">
-                <line id="vcx" class="cross" x1="0" y1="20" x2="0" y2="380"/>
-                <line id="vcy" class="cross" x1="60" y1="0" x2="540" y2="0"/>
-                <g id="vtip">
-                  <rect class="tipbox" width="178" height="68" rx="5"/>
-                  <text class="tipk" x="14" y="26">dimension 1</text><text id="vt1" class="tipv" x="164" y="26" text-anchor="end">0.0</text>
-                  <text class="tipk" x="14" y="44">dimension 2</text><text id="vt2" class="tipv" x="164" y="44" text-anchor="end">0.0</text>
-                  <text class="tipk" x="14" y="62">closest word</text><text id="vt3" class="tipv" x="164" y="62" text-anchor="end">client</text>
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div class="caption">Hover to explore the space. Click a word to see what the model predicts from it. The real space has thousands of dimensions.</div>
-        </div>
-      </div>
-    </div>
-    <div class="foot"><span>Every answer is next-word prediction. Next: how to brief it</span></div>
-  </section>
-
-  <!-- 10b-ii · VECTOR SPACE (image only) -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Under the hood</span>
-    </div>
-    <div class="body">
-      <div class="vspace r"><img src="vectorspace.png" alt="A vector space of word embeddings" /></div>
-    </div>
-  </section>
-
   <!-- 10a · TALK TO IT LIKE AN ENGINEER -->
   <section class="slide light">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Prompt engineering</span>
     </div>
-    <div class="body">
-      <h2 class="r">Prompting is delegation</h2>
-      <div class="underline r"></div>
-      <div class="split" style="align-items:start;">
-        <div>
-          <p class="lead r" style="margin-top:14px;">Talk to it the way you'd brief an engineer: <span class="accent">the model performs like the person you brief it to be.</span></p>
-          <ul class="points r" style="margin-top:20px;">
-            <li><span class="tick"></span><span><b>Give it a role.</b> Accuracy measurably improves.</span></li>
-            <li><span class="tick"></span><span><b>Give it context.</b> Up to 2x better results on hard tasks.</span></li>
-            <li><span class="tick"></span><span><b>Give it clarity.</b> Every gap gets filled with a guess.</span></li>
-          </ul>
-          <p class="src r" style="margin-top:16px;">Sources: ExpertPrompting (2023) &middot; EmotionPrompt, Microsoft Research (2023).</p>
-        </div>
-        <div class="r">
-          <div class="example-box" style="margin-top:14px;border-left-color:#C2CCD4;">
-            <span class="lbl">The vague ask</span>
-            <p style="color:var(--muted);">"Make me a dashboard."</p>
-          </div>
-          <div class="example-box" style="margin-top:14px;">
-            <span class="lbl">The clear brief</span>
-            <p>"You're a <b>senior engineer</b>. Our delivery leads lose track of risks in spreadsheets. Build a one-screen cockpit that flags late projects."</p>
-          </div>
-          <p class="takeaway r" style="margin-top:22px;"><b>A complete brief has five parts, next.</b></p>
-        </div>
-      </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <h2 class="r" style="max-width:none;">Prompting is delegation</h2>
+      <div class="underline r" style="margin:18px auto 0;"></div>
+      <p class="lead r" style="text-align:center;max-width:30ch;margin:32px auto 0;font-size:27px;">Brief the AI like you'd brief an engineer &mdash; <span class="accent">it performs like the person you ask it to be.</span></p>
     </div>
     <div class="foot"><span>Clear in, quality out, same as any delegation</span></div>
   </section>
@@ -765,11 +666,10 @@
       <h2 class="r">Prompt Engineering</h2>
       <div class="underline r"></div>
       <div class="brief2 r">
-        <div class="row"><span class="k">ROLE</span><span class="d">&ldquo;You are a senior engineer building internal tools at Capgemini.&rdquo;</span></div>
-        <div class="row"><span class="k">CONTEXT</span><span class="d">&ldquo;Our account leads track client relationships in a mini CRM. Follow-ups slip because nobody knows which account needs attention first.&rdquo;</span></div>
-        <div class="row"><span class="k">TASK</span><span class="d">&ldquo;Give each account a 0&ndash;100 score for who to call next, with a one-line reason.&rdquo;</span></div>
-        <div class="row"><span class="k">GUIDELINES</span><span class="d">&ldquo;Show the score beside each account, sort the list by urgency, plain business language.&rdquo;</span></div>
-        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">&ldquo;One screen, use only the data already in the CRM, use the key I provided and store it securely.&rdquo;</span></div>
+        <div class="row"><span class="k">CONTEXT</span><span class="d">&ldquo;We track clients in a mini CRM, but follow-ups slip.&rdquo;</span></div>
+        <div class="row"><span class="k">TASK</span><span class="d">&ldquo;Add an AI score that flags which client to call next.&rdquo;</span></div>
+        <div class="row"><span class="k">GUIDELINES</span><span class="d">&ldquo;Show the score on each client, sorted by urgency.&rdquo;</span></div>
+        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">&ldquo;One screen. Use only the CRM data.&rdquo;</span></div>
       </div>
       <div class="brief-hint r" id="briefHint">Press &rarr; to reveal each part of the brief</div>
     </div>
@@ -818,6 +718,184 @@
     <div class="foot"><span>Screenshot it &rarr; paste into Codex &rarr; say what you want changed</span></div>
   </section>
 
+  <!-- 13 · IDEAS -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Ideas</span>
+    </div>
+    <div class="body">
+      <h2 class="r">Ideas to spark you</h2>
+      <div class="underline r"></div>
+      <div class="ideas2 r">
+        <div class="ic"><div class="ic-inner">
+          <div class="ic-face ic-front"><div class="ibadge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4l4 2-4 2M18 14l3 1.5-3 1.5"/></svg></div><h3>Mini CRM</h3><div class="hintp">press &rarr;</div></div>
+          <div class="ic-face ic-back"><h3>Mini CRM</h3><ul><li>Save contacts &amp; notes</li><li>See every interaction at a glance</li><li>Flag who to follow up next</li></ul></div>
+        </div></div>
+        <div class="ic"><div class="ic-inner">
+          <div class="ic-face ic-front"><div class="ibadge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"/><path d="M12 12l4-3"/><path d="M3 12h2M19 12h2"/><path d="M12 3v2"/></svg></div><h3>Delivery Risk Cockpit</h3><div class="hintp">press &rarr;</div></div>
+          <div class="ic-face ic-back"><h3>Delivery Risk Cockpit</h3><ul><li>Track every project in one view</li><li>Spot red flags early</li><li>Auto-score what needs attention</li></ul></div>
+        </div></div>
+        <div class="ic"><div class="ic-inner">
+          <div class="ic-face ic-front"><div class="ibadge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Expertise Finder</h3><div class="hintp">press &rarr;</div></div>
+          <div class="ic-face ic-back"><h3>Expertise Finder</h3><ul><li>Search skills across teams</li><li>Match people to needs</li><li>See who's available now</li></ul></div>
+        </div></div>
+        <div class="ic"><div class="ic-inner">
+          <div class="ic-face ic-front"><div class="ibadge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></div><h3>Proposal Factory</h3><div class="hintp">press &rarr;</div></div>
+          <div class="ic-face ic-back"><h3>Proposal Factory</h3><ul><li>Turn notes into a proposal</li><li>Consistent structure &amp; tone</li><li>Export in minutes</li></ul></div>
+        </div></div>
+      </div>
+      <p class="takeaway r" id="ideasHint" style="margin-top:30px;text-align:center;">Press &rarr; to flip each idea &mdash; or bring your own.</p>
+    </div>
+    <div class="foot"><span>Keep it small enough to finish in two hours</span></div>
+  </section>
+
+  <!-- 13b · GO FURTHER WITH AI -->
+  <section class="slide hero">
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Go further</span>
+    </div>
+    <div class="body" style="justify-content:center;">
+      <h2 class="r" style="text-align:center;max-width:none;">Want to go further?</h2>
+      <div class="flow3 r">
+        <div class="fnode"><div class="fk">Built <span style="color:#9ca3af;">with</span> AI</div><div class="fs">AI built your product for you</div></div>
+        <div class="farrow">&rarr;</div>
+        <div class="fnode hl"><div class="fk">AI <span style="color:#fb923c;">inside</span> it</div><div class="fs">your product uses AI itself</div></div>
+      </div>
+      <p class="ex-line r">Give it AI features with the <b>OpenAI key in the SharePoint guide</b>.</p>
+    </div>
+    <div class="foot"><span>Your coaches can help you wire it in</span></div>
+  </section>
+
+  <!-- 13c · WITH / WITHOUT AI (Mini CRM example) -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Example &middot; Mini CRM</span>
+    </div>
+    <div class="body" style="justify-content:center;">
+      <h2 class="r" style="text-align:center;max-width:none;">The same feature, plus AI</h2>
+      <div class="compare r">
+        <div class="crow"><span class="clbl">Without AI</span><span class="ctext">Save a contact and see every note on them in one place.</span></div>
+        <div class="crow hl"><span class="clbl">With AI</span><span class="ctext">It <b>scores who to call next</b> and drafts the follow-up for you.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span>Same product &mdash; AI just makes it smarter</span></div>
+  </section>
+
+  <!-- 14 · LET'S BUILD -->
+  <section class="slide hero">
+    <div class="motif"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Your turn</span>
+    </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <span class="kicker r">Two hours &middot; four steps &middot; one working product</span>
+      <h1 class="r" style="margin:6px 0 0;font-size:58px;">Let's build</h1>
+      <div class="tlwrap r">
+        <svg viewBox="0 0 1240 250" role="img" aria-label="Two-hour build timeline from 10:00 to 12:00: Codex setup 5 minutes, Master Prompt and Flow, Build the core feature 60 minutes, Iterate 30 minutes">
+          <defs>
+            <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+          </defs>
+          <g>
+            <rect x="83" y="100" width="124" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="92" y="103" width="106" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="99" y="130" fill="#fb923c" font-size="13" font-weight="700">1</text>
+            <text x="145" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Codex setup</text>
+            <text x="145" y="172" text-anchor="middle" fill="#9ca3af" font-size="12">~5 min</text>
+          </g>
+          <g>
+            <rect x="213" y="100" width="254" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="222" y="103" width="236" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="229" y="130" fill="#fb923c" font-size="13" font-weight="700">2</text>
+            <text x="340" y="150" text-anchor="middle" fill="#fff" font-size="14.5" font-weight="600">Master Prompt &amp; Flow</text>
+            <text x="340" y="172" text-anchor="middle" fill="#9ca3af" font-size="12.5">Describe it in plain words</text>
+          </g>
+          <g>
+            <rect x="473" y="100" width="401" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="482" y="103" width="383" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="489" y="130" fill="#fb923c" font-size="13" font-weight="700">3</text>
+            <text x="675" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Build the core feature</text>
+            <text x="675" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">Get the one essential thing working &middot; ~60 min</text>
+          </g>
+          <g>
+            <rect x="883" y="100" width="274" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="892" y="103" width="256" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="899" y="130" fill="#fb923c" font-size="13" font-weight="700">4</text>
+            <text x="1020" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Iterate</text>
+            <text x="1020" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">See, decide, improve &middot; ~30 min</text>
+          </g>
+          <g stroke="#3a4658" stroke-width="1.5">
+            <line x1="80" y1="200" x2="80" y2="212"/>
+            <line x1="210" y1="200" x2="210" y2="212"/>
+            <line x1="470" y1="200" x2="470" y2="212"/>
+            <line x1="880" y1="200" x2="880" y2="212"/>
+            <line x1="1160" y1="200" x2="1160" y2="212"/>
+          </g>
+          <g fill="#9ca3af" font-size="12.5" font-weight="600">
+            <text x="80" y="232" text-anchor="middle">10:00</text>
+            <text x="210" y="232" text-anchor="middle">10:05</text>
+            <text x="470" y="232" text-anchor="middle">10:30</text>
+            <text x="880" y="232" text-anchor="middle">11:30</text>
+            <text x="1160" y="232" text-anchor="middle">12:00</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="foot"><span>From idea to something real</span></div>
+  </section>
+
+  <!-- 15pre0 · CODEX PROJECT SETUP -->
+  <section class="slide hero">
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Codex setup</span>
+    </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <h2 class="r" style="max-width:none;font-size:42px;">Codex project setup</h2>
+      <p class="lead r" style="margin-top:6px;">Add the Capgemini boilerplate to Codex.</p>
+      <div class="kickvid r" style="max-width:760px;margin-top:18px;"><video src="add-boilerplate.mp4" class="autoloop" autoplay loop muted playsinline></video></div>
+    </div>
+    <div class="foot"><span>Point Codex at the boilerplate, then kick it off</span></div>
+  </section>
+
+  <!-- 16a · CODEX KICKOFF · STEP 1 (approval mode) -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Codex setup</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex setup</div>
+          <h2 style="font-size:32px;max-width:30ch;">Choose the approval mode</h2>
+        </div>
+      </div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-1.png" alt="Codex — choose the approval mode" /></div>
+    </div>
+    <div class="foot"><span>Decide how much Codex can do on its own</span></div>
+  </section>
+
+  <!-- 15pre · KICK OFF IN THE BACKGROUND -->
+  <section class="slide hero">
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Step 1 &middot; Kick it off</span>
+    </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <div class="bigcmd r"><span class="sl">/</span>kickoff<span class="cur"></span></div>
+      <p class="lead r" style="margin-top:4px;">Set up your machine in the background.</p>
+      <div class="kickvid r"><video src="kickoff.mp4" class="autoloop" autoplay loop muted playsinline></video></div>
+    </div>
+    <div class="foot"><span>Let it work while you think &middot; then bring your Master Prompt</span></div>
+  </section>
+
   <!-- 12 · THE IQ METHOD -->
   <section class="slide panel">
     <div class="top">
@@ -848,119 +926,6 @@
     <div class="foot"><span>Get this right and the build almost writes itself</span></div>
   </section>
 
-  <!-- 13 · IDEAS -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Ideas</span>
-    </div>
-    <div class="body">
-      <h2 class="r">Ideas to spark you</h2>
-      <div class="underline r"></div>
-      <div class="grid g4" style="margin-top:26px;">
-        <div class="card r"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4l4 2-4 2M18 14l3 1.5-3 1.5"/></svg></div><h3>Mini CRM</h3><p>All your contacts and opportunities in one place.</p></div>
-        <div class="card r"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"/><path d="M12 12l4-3"/><path d="M3 12h2M19 12h2M12 12v0"/><path d="M12 3v2"/></svg></div><h3>Delivery Risk Cockpit</h3><p>Spot project risks early, before they grow.</p></div>
-        <div class="card r"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Expertise Finder</h3><p>Find the right expert inside the company, fast.</p></div>
-        <div class="card r"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></div><h3>Proposal Factory</h3><p>Generate clean, structured commercial proposals.</p></div>
-      </div>
-      <p class="takeaway r" style="margin-top:24px;">Or bring your own, type <b>/givemeideas</b> any time.</p>
-    </div>
-    <div class="foot"><span>Keep it small enough to finish in two hours</span></div>
-  </section>
-
-  <!-- 14 · LET'S BUILD -->
-  <section class="slide hero">
-    <div class="motif"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Your turn</span>
-    </div>
-    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
-      <span class="kicker r">Two hours &middot; four steps &middot; one working product</span>
-      <h1 class="r" style="margin:6px 0 0;font-size:58px;">Let's build</h1>
-      <div class="tlwrap r">
-        <svg viewBox="0 0 1240 250" role="img" aria-label="Two-hour build timeline from 10:00 to 12:00 in four phases: Master Prompt and Flow 20 minutes, Kickoff 10 minutes, Build the core feature 60 minutes, Iterate 30 minutes">
-          <defs>
-            <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
-          </defs>
-          <g>
-            <rect x="83" y="100" width="174" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
-            <rect x="92" y="103" width="156" height="4" rx="2" fill="url(#tlg)"/>
-            <text x="99" y="130" fill="#fb923c" font-size="13" font-weight="700">1</text>
-            <text x="170" y="152" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="600">Master Prompt &amp; Flow</text>
-            <text x="170" y="174" text-anchor="middle" fill="#9ca3af" font-size="12">~20 min</text>
-          </g>
-          <g>
-            <rect x="263" y="100" width="84" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
-            <rect x="272" y="103" width="66" height="4" rx="2" fill="url(#tlg)"/>
-            <text x="279" y="130" fill="#fb923c" font-size="13" font-weight="700">2</text>
-            <text x="305" y="152" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="600">Kickoff</text>
-            <text x="305" y="174" text-anchor="middle" fill="#9ca3af" font-size="12">~10 min</text>
-          </g>
-          <g>
-            <rect x="353" y="100" width="534" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
-            <rect x="362" y="103" width="516" height="4" rx="2" fill="url(#tlg)"/>
-            <text x="369" y="130" fill="#fb923c" font-size="13" font-weight="700">3</text>
-            <text x="620" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Build the core feature</text>
-            <text x="620" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">Get the one essential thing working &middot; ~60 min</text>
-          </g>
-          <g>
-            <rect x="893" y="100" width="264" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
-            <rect x="902" y="103" width="246" height="4" rx="2" fill="url(#tlg)"/>
-            <text x="909" y="130" fill="#fb923c" font-size="13" font-weight="700">4</text>
-            <text x="1025" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Iterate</text>
-            <text x="1025" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">See, decide, improve &middot; ~30 min</text>
-          </g>
-          <g stroke="#3a4658" stroke-width="1.5">
-            <line x1="80" y1="200" x2="80" y2="212"/>
-            <line x1="260" y1="200" x2="260" y2="212"/>
-            <line x1="350" y1="200" x2="350" y2="212"/>
-            <line x1="890" y1="200" x2="890" y2="212"/>
-            <line x1="1160" y1="200" x2="1160" y2="212"/>
-          </g>
-          <g fill="#9ca3af" font-size="12.5" font-weight="600">
-            <text x="80" y="232" text-anchor="middle">10:00</text>
-            <text x="260" y="232" text-anchor="middle">10:20</text>
-            <text x="350" y="232" text-anchor="middle">10:30</text>
-            <text x="890" y="232" text-anchor="middle">11:30</text>
-            <text x="1160" y="232" text-anchor="middle">12:00</text>
-          </g>
-        </svg>
-      </div>
-    </div>
-    <div class="foot"><span>From idea to something real</span></div>
-  </section>
-
-  <!-- 15pre0 · CODEX PROJECT SETUP -->
-  <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Codex setup</span>
-    </div>
-    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
-      <h2 class="r" style="max-width:none;font-size:42px;">Codex project setup</h2>
-      <p class="lead r" style="margin-top:6px;">Add the Capgemini boilerplate to Codex.</p>
-      <div class="kickvid r" style="max-width:760px;margin-top:18px;"><video src="add-boilerplate.mp4" class="autoloop" autoplay loop muted playsinline></video></div>
-    </div>
-    <div class="foot"><span>Point Codex at the boilerplate, then kick it off</span></div>
-  </section>
-
-  <!-- 15pre · KICK OFF IN THE BACKGROUND -->
-  <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Step 1 &middot; Kick it off</span>
-    </div>
-    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
-      <div class="bigcmd r"><span class="sl">/</span>kickoff<span class="cur"></span></div>
-      <p class="lead r" style="margin-top:4px;">Set up your machine in the background.</p>
-      <div class="kickvid r"><video src="kickoff.mp4" class="autoloop" autoplay loop muted playsinline></video></div>
-    </div>
-    <div class="foot"><span>Let it work while you think &middot; then bring your Master Prompt</span></div>
-  </section>
-
   <!-- 15a · MASTER PROMPT WALKTHROUGH · PART 1 -->
   <section class="slide light">
     <div class="top">
@@ -989,106 +954,20 @@
     <div class="foot"><span>How to write your Master Prompt &middot; Part 1</span></div>
   </section>
 
-  <!-- 15b · MASTER PROMPT WALKTHROUGH · PART 2 -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Master Prompt</span>
-    </div>
-    <div class="body">
-      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
-        <div>
-          <div class="stepflag"><span class="bar"></span>Master Prompt &middot; Part 2 of 2</div>
-          <h2 style="font-size:32px;max-width:30ch;">Now bring it together</h2>
-        </div>
-        <div class="caption" style="margin:0;max-width:30ch;text-align:right;flex:0 0 auto;">Replay any part as many times as you need.</div>
-      </div>
-      <div class="vstage paused r">
-        <video src="master-prompt-2.mp4" poster="master-prompt-2.jpg" preload="metadata" playsinline muted></video>
-        <div class="vbar">
-          <button class="vbtn vtoggle" aria-label="Play or pause"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
-          <span class="vtime cur">0:00</span>
-          <div class="vseek"><div class="vseek-fill"></div><div class="vseek-knob"></div></div>
-          <span class="vtime dur">0:00</span>
-          <button class="vbtn vrestart" aria-label="Restart"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
-        </div>
-      </div>
-    </div>
-    <div class="foot"><span>How to write your Master Prompt &middot; Part 2</span></div>
-  </section>
-
-  <!-- 16a · CODEX KICKOFF · STEP 1 -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
-    </div>
-    <div class="body">
-      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
-        <div>
-          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 1 of 4</div>
-          <h2 style="font-size:32px;max-width:30ch;">Choose the approval mode</h2>
-        </div>
-        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum">2</span><span class="cxgap"></span><span class="cxnum">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
-      </div>
-      <div class="cxstage r"><img class="cxshot" src="codex-step-1.png" alt="Codex step 1 — choose the approval mode" /></div>
-    </div>
-    <div class="foot"><span>Decide how much Codex can do on its own</span></div>
-  </section>
-
-  <!-- 16b · CODEX KICKOFF · STEP 2 -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
-    </div>
-    <div class="body">
-      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
-        <div>
-          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 2 of 4</div>
-          <h2 style="font-size:32px;max-width:30ch;">Select the Kickoff command</h2>
-        </div>
-        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
-      </div>
-      <div class="cxstage r"><img class="cxshot" src="codex-step-2.png" alt="Codex step 2 — select the Kickoff command" /></div>
-    </div>
-    <div class="foot"><span>Pick the Capgemini Vibe Coding Lab boilerplate</span></div>
-  </section>
-
-  <!-- 16c · CODEX KICKOFF · STEP 3 -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
-    </div>
-    <div class="body">
-      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
-        <div>
-          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 3 of 4</div>
-          <h2 style="font-size:32px;max-width:30ch;">Run the kickoff command</h2>
-        </div>
-        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum on">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
-      </div>
-      <div class="cxstage r"><img class="cxshot" src="codex-step-3.png" alt="Codex step 3 — confirm project and branch" /></div>
-    </div>
-    <div class="foot"><span>Work locally, on the main branch</span></div>
-  </section>
-
   <!-- 16d · CODEX KICKOFF · STEP 4 -->
   <section class="slide light">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+      <span class="tag">Codex kickoff</span>
     </div>
     <div class="body">
       <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
         <div>
-          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 4 of 4</div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff</div>
           <h2 style="font-size:32px;max-width:30ch;">Codex builds &amp; opens a preview</h2>
         </div>
-        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum on">3</span><span class="cxgap"></span><span class="cxnum on">4</span></div>
       </div>
-      <div class="cxstage r"><img class="cxshot" src="codex-step-4.png" alt="Codex step 4 — Codex builds and opens a preview" /></div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-4.png" alt="Codex builds and opens a preview" /></div>
     </div>
     <div class="foot"><span>It installs, runs, checks, and shows your app</span></div>
   </section>
@@ -1102,8 +981,8 @@
     <div class="body">
       <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
         <div>
-          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; in action</div>
-          <h2 style="font-size:32px;max-width:30ch;">The whole kickoff, end to end</h2>
+          <div class="stepflag"><span class="bar"></span>Master Prompt</div>
+          <h2 style="font-size:32px;max-width:30ch;">Paste your Master Prompt in Codex</h2>
         </div>
         <div class="caption" style="margin:0;max-width:30ch;text-align:right;flex:0 0 auto;">Play, pause, or scrub back anytime.</div>
       </div>
@@ -1174,11 +1053,11 @@
       <div class="tl-left r">
         <div class="tl-kicker">Today's flow</div>
         <ol class="tl-steps">
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Codex setup</span><span class="tl-time">9:40</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Run the <b>/kickoff</b> command</span><span class="tl-time">9:45</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Start chatting with the Master Prompt builder</span><span class="tl-time">9:50 &rarr; 10:20 &middot; up to 30 min</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Paste the Master Prompt &amp; wait for the first app preview</span><span class="tl-time">10:20</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Reiterate and build until you're satisfied</span><span class="tl-time">10:30 &rarr; 12:00</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Codex setup &amp; <b>/kickoff</b></span><span class="tl-time">10:00 &middot; ~5 min</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Master Prompt &amp; Flow &mdash; chat it through</span><span class="tl-time">10:05 &rarr; 10:30 &middot; up to 30 min</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Paste the Master Prompt &amp; wait for the first preview</span><span class="tl-time">10:30</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Build the core feature</span><span class="tl-time">10:30 &rarr; 11:30</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Reiterate until you're satisfied</span><span class="tl-time">11:30 &rarr; 12:00</span></div></li>
         </ol>
         <div class="tl-coaches">
           <div class="tl-coaches-lbl">Your coaches &middot; call us anytime</div>
@@ -1342,6 +1221,22 @@
   const briefHint=document.getElementById('briefHint');
   let briefIdx=[...slides].findIndex(s=>s.querySelector('.brief2'));
   let bStep=0;
+  // "Craft a product" — merge plays on the next click
+  let craftIdx=[...slides].findIndex(s=>s.classList.contains('craft-slide'));
+  let cMerged=false;
+  function craftShow(){ if(craftIdx>=0) slides[craftIdx].classList.toggle('merged',cMerged); }
+  // "Ideas to spark you" — flip one card per click
+  let ideasIdx=[...slides].findIndex(s=>s.querySelector('.ideas2'));
+  let iStep=0;
+  const ideaCards=ideasIdx>=0?[...slides[ideasIdx].querySelectorAll('.ic')]:[];
+  const IDEAS_N=ideaCards.length;
+  const ideasHint=document.getElementById('ideasHint');
+  function ideasShow(){
+    if(ideasIdx<0)return;
+    slides[ideasIdx].querySelector('.ideas2').classList.toggle('stepping', iStep>0);
+    ideaCards.forEach((c,k)=>c.classList.toggle('open', k===iStep-1));
+    if(ideasHint) ideasHint.style.opacity = iStep>=IDEAS_N ? '0' : '1';
+  }
   function briefShow(){
     briefRows.forEach((r,p)=>{
       r.classList.toggle('show', bStep >= 2*p+1);
@@ -1381,6 +1276,8 @@
     const pv=i;
     i=Math.max(0,Math.min(total-1,n));
     if(i===briefIdx && pv!==briefIdx){ bStep = pv>i ? BRIEF_MAX : 0; }
+    if(i===craftIdx && pv!==craftIdx){ cMerged = pv>i; craftShow(); }
+    if(i===ideasIdx && pv!==ideasIdx){ iStep = pv>i ? IDEAS_N : 0; ideasShow(); }
     if(pv===llmIdx && i!==llmIdx){ llmFocus=false; centerGraph(false); }
     if(i===llmIdx && pv!==llmIdx){
       if(pv>i){ llmFocus=true; clearTimeout(llmSettle); llmSettle=setTimeout(function(){ if(llmFocus&&i===llmIdx) centerGraph(true); },480); }
@@ -1391,11 +1288,15 @@
   }
   function next(){
     if(i===briefIdx && bStep<BRIEF_MAX){ bStep++; briefShow(); return; }
+    if(i===craftIdx && !cMerged){ cMerged=true; craftShow(); return; }
+    if(i===ideasIdx && iStep<IDEAS_N){ iStep++; ideasShow(); return; }
     if(i===llmIdx && !llmFocus){ llmFocus=true; centerGraph(true); return; }
     go(i+1);
   }
   function prev(){
     if(i===briefIdx && bStep>0){ bStep--; briefShow(); return; }
+    if(i===craftIdx && cMerged){ cMerged=false; craftShow(); return; }
+    if(i===ideasIdx && iStep>0){ iStep--; ideasShow(); return; }
     if(i===llmIdx && llmFocus){ llmFocus=false; centerGraph(false); return; }
     go(i-1);
   }
