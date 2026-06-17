@@ -48,6 +48,40 @@
   .slide.hero{color:#fff;background:transparent;}
   .slide.title{background:#000 url('capgemini-intro-bg.png') center/cover no-repeat;}
   .slide.data{background:transparent;}
+  .slide.timer-slide{background:#000;}
+  .tbg{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;z-index:0;}
+  .tbg1{background-image:url('timer-bg.png');}
+  .tbg2{background-image:url('timer-bg-2.png');opacity:0;animation:tbgfade 50s ease-in-out infinite;}
+  @keyframes tbgfade{0%,30%{opacity:0;}50%,80%{opacity:1;}100%{opacity:0;}}
+
+  /* Debugging slide — real screenshots: capture website → paste into Codex (looping) */
+  .dbg{position:relative;width:1180px;max-width:100%;height:402px;margin:14px auto 0;}
+  .dwin{position:absolute;top:16px;border-radius:12px;overflow:hidden;border:1px solid #2a3645;background:#0e1521;box-shadow:0 24px 50px -18px rgba(0,0,0,.7);}
+  .dbg-app{left:0;width:548px;}
+  .dbg-codex{right:0;width:560px;}
+  .dwin-bar{height:30px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#0e1521;border-bottom:1px solid #1f2937;}
+  .dwin-bar i{width:10px;height:10px;border-radius:50%;background:#3a4658;display:block;}
+  .dwin-bar .url{margin-left:10px;font-size:11.5px;color:var(--muted);letter-spacing:.02em;}
+  .shotimg{display:block;width:100%;height:auto;}
+  .capbox{position:absolute;left:85.5%;top:36px;width:11.5%;height:30px;border:2px dashed var(--vibrant);border-radius:6px;background:rgba(249,115,22,.16);opacity:0;animation:cap 13s ease infinite;pointer-events:none;z-index:4;}
+  .flash{position:absolute;inset:0;background:#fff;opacity:0;animation:flash 13s ease infinite;pointer-events:none;z-index:5;}
+  .dbg-thumb{position:absolute;left:482px;top:48px;z-index:9;width:132px;border-radius:8px;overflow:hidden;border:2px solid var(--vibrant);box-shadow:0 16px 34px rgba(0,0,0,.7);opacity:0;animation:thumbFly 13s ease infinite;}
+  .dbg-thumb img{display:block;width:100%;height:auto;}
+  .cx-overlay{position:absolute;left:41%;right:8%;top:72.5%;z-index:6;opacity:0;animation:cxin 13s ease infinite;}
+  .cx-attach{display:inline-flex;align-items:center;gap:7px;background:#2f2f33;border:1px solid #4a4a52;border-radius:8px;padding:6px 10px;font-size:11.5px;color:#e5e7eb;margin-bottom:8px;}
+  .cx-attach .px{width:18px;height:14px;border-radius:3px;background:var(--grad);display:block;}
+  .cx-msg{font-size:14px;color:#fff;line-height:1.35;}
+  .cx-cursor{display:inline-block;width:2px;height:1.05em;background:var(--vibrant);vertical-align:-2px;margin-left:1px;animation:blink 1.1s step-end infinite;}
+  @keyframes cap{0%,7%{opacity:0;transform:scale(1.25)}11%,17%{opacity:1;transform:scale(1)}24%,100%{opacity:0}}
+  @keyframes flash{0%,15%{opacity:0}17%{opacity:.7}20%,100%{opacity:0}}
+  @keyframes thumbFly{0%,16%{opacity:0;transform:translate(0,0) scale(.5)}21%,26%{opacity:1;transform:translate(0,0) scale(1)}43%{opacity:1;transform:translate(372px,198px) scale(.42)}48%,100%{opacity:0;transform:translate(372px,198px) scale(.4)}}
+  @keyframes cxin{0%,47%{opacity:0}53%{opacity:1}100%{opacity:1}}
+
+  /* "Want the slides?" command slide */
+  .bigcmd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:118px;font-weight:600;line-height:1;letter-spacing:-.02em;color:#fff;margin:10px 0 30px;}
+  .bigcmd .sl{color:var(--brand,#f97316);}
+  .bigcmd .cur{display:inline-block;width:.06em;height:.86em;background:var(--vibrant);margin-left:.08em;vertical-align:-0.06em;animation:blink 1.1s step-end infinite;}
+  @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
 
   /* Spade watermark on divider slides */
   .motif{position:absolute;right:-8%;top:-18%;width:660px;height:660px;pointer-events:none;}
@@ -93,6 +127,55 @@
   @keyframes iq-float-slow{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-30px) scale(1.08);}}
   @keyframes iq-float-medium{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,25px) scale(1.12);}}
   @keyframes iq-float-reverse{0%,100%{transform:translate(0,0) scale(1.05);}50%{transform:translate(-45px,-20px) scale(0.95);}}
+
+  /* Video walkthrough slides — framed like the step images */
+  .vstage{position:relative;flex:1 1 auto;min-height:0;margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#0b0b0c;}
+  .vstage video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#0b0b0c;cursor:pointer;}
+  .vbar{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;align-items:center;gap:14px;padding:36px 22px 15px;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));opacity:0;transition:opacity .25s ease;}
+  .vstage:hover .vbar,.vstage.paused .vbar{opacity:1;}
+  .vbtn{background:none;border:none;cursor:pointer;padding:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;opacity:.9;transition:opacity .15s ease;}
+  .vbtn:hover{opacity:1;}
+  .vbtn svg{width:22px;height:22px;fill:#fff;}
+  .vtoggle .ic-pause{display:none;}
+  .vstage.playing .vtoggle .ic-play{display:none;}
+  .vstage.playing .vtoggle .ic-pause{display:block;}
+  .vseek{position:relative;flex:1 1 auto;height:5px;border-radius:9999px;background:rgba(255,255,255,.28);cursor:pointer;}
+  .vseek-fill{position:absolute;left:0;top:0;height:100%;border-radius:9999px;background:var(--grad);width:0;}
+  .vseek-knob{position:absolute;top:50%;left:0;width:13px;height:13px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 1px 5px rgba(0,0,0,.6);opacity:0;transition:opacity .2s ease;}
+  .vstage:hover .vseek-knob,.vstage.paused .vseek-knob{opacity:1;}
+  .vtime{font-size:12.5px;color:#fff;opacity:.9;flex:0 0 auto;letter-spacing:.02em;font-variant-numeric:tabular-nums;}
+
+  /* Codex kickoff step slides */
+  .cxprog{display:flex;align-items:center;gap:9px;flex:0 0 auto;}
+  .cxprog .cxnum{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;flex:0 0 auto;}
+  .cxprog .cxnum.on{background:var(--deep);border-color:var(--deep);color:#fff;}
+  .cxprog .cxgap{width:20px;height:1px;background:var(--line);flex:0 0 auto;}
+  .cxstage{position:relative;flex:1 1 auto;min-height:0;margin-top:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#0b0b0c;}
+  .cxshot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+
+  /* Build → loop graph */
+  .loopwrap{display:flex;justify-content:center;margin-top:10px;}
+  .loopwrap svg{width:min(980px,100%);height:auto;}
+  .loopwrap svg text{font-family:inherit;}
+  .tlwrap{display:flex;justify-content:center;width:100%;margin-top:22px;}
+  .tlwrap svg{width:min(1150px,100%);height:auto;}
+  .tlwrap svg text{font-family:inherit;}
+
+  /* Live challenge timer */
+  .timerwrap{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;}
+  .biglogo{padding:16px 34px;border-radius:14px;gap:28px;margin-bottom:36px;}
+  .biglogo .cap{height:48px;}
+  .biglogo .iq{height:44px;}
+  .biglogo .divider{height:44px;}
+  .bigclock{font-size:168px;font-weight:300;line-height:1;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums;}
+  .bigclock .ap{font-size:.26em;font-weight:500;letter-spacing:.22em;color:var(--vibrant);vertical-align:0.9em;margin-left:.18em;}
+  .clocksub{font-size:23px;color:var(--muted);margin-top:14px;}
+  .clocksub b{color:var(--vibrant);font-weight:600;}
+  .tprog{width:760px;max-width:86%;margin-top:46px;}
+  .tprog-head{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+  .tprog-head .mid{color:var(--vibrant);font-weight:700;}
+  .tprog-track{height:14px;border-radius:9999px;background:#1f2937;border:1px solid var(--line);overflow:hidden;}
+  .tprog-fill{height:100%;width:0;border-radius:9999px;background:var(--grad);box-shadow:0 0 22px rgba(249,115,22,.55);transition:width 1s linear;}
 
   /* Big stat */
   .stat{font-size:250px;font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--deep);}
@@ -192,6 +275,17 @@
   .bigparts .row{display:flex;align-items:baseline;gap:30px;padding:16px 0;border-bottom:1px solid var(--line);}
   .bigparts .k{font-size:29px;font-weight:700;color:var(--deep);min-width:300px;letter-spacing:.03em;}
   .bigparts .d{font-size:18px;font-weight:300;color:var(--muted);}
+
+  /* "Brief in action" — vertical list, revealed & settled one part per click */
+  .brief2{display:flex;flex-direction:column;gap:6px;max-width:940px;margin:22px auto 0;width:100%;}
+  .brief2 .row{position:relative;z-index:1;display:flex;gap:28px;align-items:baseline;padding:13px 20px;border-radius:10px;border-bottom:1px solid var(--line);transform-origin:center;transition:background .45s ease,transform .5s cubic-bezier(.16,.84,.44,1),box-shadow .45s ease;}
+  .brief2 .k{font-size:23px;font-weight:700;color:#3a4658;min-width:240px;letter-spacing:.04em;transition:color .45s ease;}
+  .brief2 .d{font-size:18px;font-weight:300;color:var(--fg2,#d1d5db);line-height:1.42;opacity:0;transform:translateY(7px);transition:opacity .5s ease,transform .5s ease;}
+  .brief2 .row.show .k{color:var(--deep);}
+  .brief2 .row.show .d{opacity:1;transform:none;}
+  .brief2 .row.big{z-index:2;background:rgba(249,115,22,.12);transform:scale(1.3);box-shadow:0 20px 46px -22px rgba(249,115,22,.5);}
+  .brief2 .row.big .k{color:#fb923c;}
+  .brief-hint{text-align:center;font-size:12.5px;color:var(--muted);margin-top:26px;letter-spacing:.04em;transition:opacity .3s ease;}
   .promptcard{background:var(--panel);border:1px solid var(--line);padding:30px 34px;max-width:1100px;border-radius:12px;}
   .promptcard .line{display:flex;gap:18px;margin-bottom:15px;font-size:16.5px;line-height:1.5;}
   .promptcard .line:last-child{margin-bottom:0;}
@@ -619,38 +713,16 @@
     <div class="body">
       <h2 class="r">Prompt Engineering</h2>
       <div class="underline r"></div>
-      <p class="lead r" style="margin-top:14px;">The <span class="accent">golden rule</span>: clearly define the role, the task and the context you give the model.</p>
-      <div class="bigparts r">
-        <div class="row"><span class="k">ROLE</span><span class="d">who the AI should be</span></div>
-        <div class="row"><span class="k">CONTEXT</span><span class="d">your situation &amp; why</span></div>
-        <div class="row"><span class="k">TASK</span><span class="d">what you want done</span></div>
-        <div class="row"><span class="k">GUIDELINES</span><span class="d">how to do it, style, steps</span></div>
-        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">limits &amp; what to avoid</span></div>
+      <div class="brief2 r">
+        <div class="row"><span class="k">ROLE</span><span class="d">&ldquo;You are a senior engineer building internal tools at Capgemini.&rdquo;</span></div>
+        <div class="row"><span class="k">CONTEXT</span><span class="d">&ldquo;Our account leads track client relationships in a mini CRM. Follow-ups slip because nobody knows which account needs attention first.&rdquo;</span></div>
+        <div class="row"><span class="k">TASK</span><span class="d">&ldquo;Add an AI &lsquo;next call&rsquo; score: rate every account 0 to 100 on follow-up urgency, with a one-line reason.&rdquo;</span></div>
+        <div class="row"><span class="k">GUIDELINES</span><span class="d">&ldquo;Show the score beside each account, sort the list by urgency, plain business language.&rdquo;</span></div>
+        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">&ldquo;One screen, use only the data already in the CRM, use the key I provided and store it securely.&rdquo;</span></div>
       </div>
-      <p class="src r" style="margin-top:18px;">An established best practice recommended by OpenAI and documented in academic literature. Source: OpenAI prompt engineering guide.</p>
+      <div class="brief-hint r" id="briefHint">Press &rarr; to reveal each part of the brief</div>
     </div>
-    <div class="foot"><span>Next: the five parts on a real Capgemini example</span></div>
-  </section>
-
-  <!-- 12b · WORKED EXAMPLE -->
-  <section class="slide light">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Worked example</span>
-    </div>
-    <div class="body">
-      <h2 class="r">The brief, in action</h2>
-      <div class="underline r"></div>
-      <p class="lead r" style="margin-top:14px;">One feature for a Capgemini mini CRM: <span class="accent">an AI score that tells account leads who to call next.</span></p>
-      <div class="bigparts r" style="max-width:1240px;">
-        <div class="row"><span class="k">ROLE</span><span class="d">"You are a senior engineer building internal tools at Capgemini."</span></div>
-        <div class="row"><span class="k">CONTEXT</span><span class="d">"Our account leads track client relationships in a mini CRM. Follow-ups slip because nobody knows which account needs attention first."</span></div>
-        <div class="row"><span class="k">TASK</span><span class="d">"Add an AI 'next call' score: rate every account 0 to 100 on follow-up urgency, with a one-line reason."</span></div>
-        <div class="row"><span class="k">GUIDELINES</span><span class="d">"Show the score beside each account, sort the list by urgency, plain business language."</span></div>
-        <div class="row"><span class="k">CONSTRAINTS</span><span class="d">"One screen, use only the data already in the CRM, use the OpenAI key I provided and store it securely."</span></div>
-      </div>
-    </div>
-    <div class="foot"><span>One clear brief, one feature, not the whole system</span></div>
+    <div class="foot"><span>Role &middot; Context &middot; Task &middot; Guidelines &middot; Constraints</span></div>
   </section>
 
   <!-- 10 · WHAT WE'LL BUILD -->
@@ -674,16 +746,25 @@
       <span class="tag">Debugging</span>
     </div>
     <div class="body">
-      <h2 class="r">Show, don't fix</h2>
-      <div class="underline r"></div>
-      <div class="steps">
-        <div class="stepcard r"><div class="n">1</div><h3>Say what you see<br/><span style="color:var(--muted);font-weight:300;font-size:14px;">"I click Save and nothing happens."</span></h3></div>
-        <div class="stepcard r"><div class="n">2</div><h3>Open the console<br/><span style="color:var(--muted);font-weight:300;font-size:14px;">right-click &rarr; Inspect &rarr; Console, copy any red error.</span></h3></div>
-        <div class="stepcard r"><div class="n">3</div><h3>Let the assistant fix it, then try again</h3></div>
+      <h2 class="r" style="font-size:38px;margin-bottom:0;">Show Codex what you mean.</h2>
+      <div class="dbg r">
+        <div class="dwin dbg-app">
+          <div class="dwin-bar"><i></i><i></i><i></i><span class="url">conduit.app</span></div>
+          <img class="shotimg" src="website-demo.png" alt="A website you built" />
+          <div class="capbox"></div>
+          <div class="flash"></div>
+        </div>
+        <div class="dbg-thumb"><img src="website-demo.png" alt="" /></div>
+        <div class="dwin dbg-codex">
+          <img class="shotimg" src="codex-screenshot.jpg" alt="The Codex app where you write" />
+          <div class="cx-overlay">
+            <span class="cx-attach"><span class="px"></span> screenshot.png</span>
+            <div class="cx-msg">Make the <b>Sign&#8209;up</b> button bigger and use our orange<span class="cx-cursor"></span></div>
+          </div>
+        </div>
       </div>
-      <p class="takeaway r" style="margin-top:26px;">You never read code. You're the <b>witness</b>, not the mechanic, just point to the warning light.</p>
     </div>
-    <div class="foot"><span>Good information turns "it's broken" into a 10-second fix</span></div>
+    <div class="foot"><span>Screenshot it &rarr; paste into Codex &rarr; say what you want changed</span></div>
   </section>
 
   <!-- 12 · THE IQ METHOD -->
@@ -743,111 +824,300 @@
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
       <span class="tag">Your turn</span>
     </div>
-    <div class="body">
-      <span class="kicker r">Now it's time</span>
-      <h1 class="r" style="margin-top:14px;">Let's build</h1>
-      <p class="lead r">Two hours. Four steps. One working product.</p>
-      <div class="chips r">
-        <span class="chip"><span class="num">1</span> Master Prompt &amp; Flow</span>
-        <span class="chip"><span class="num">2</span> Kickoff</span>
-        <span class="chip"><span class="num">3</span> Build</span>
-        <span class="chip"><span class="num">4</span> Iterate</span>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <span class="kicker r">Two hours &middot; four steps &middot; one working product</span>
+      <h1 class="r" style="margin:6px 0 0;font-size:58px;">Let's build</h1>
+      <div class="tlwrap r">
+        <svg viewBox="0 0 1240 250" role="img" aria-label="Two-hour build timeline from 10:00 to 12:00 in four phases: Master Prompt and Flow 20 minutes, Kickoff 10 minutes, Build the core feature 60 minutes, Iterate 30 minutes">
+          <defs>
+            <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+          </defs>
+          <g>
+            <rect x="83" y="100" width="174" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="92" y="103" width="156" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="99" y="130" fill="#fb923c" font-size="13" font-weight="700">1</text>
+            <text x="170" y="152" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="600">Master Prompt &amp; Flow</text>
+            <text x="170" y="174" text-anchor="middle" fill="#9ca3af" font-size="12">~20 min</text>
+          </g>
+          <g>
+            <rect x="263" y="100" width="84" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="272" y="103" width="66" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="279" y="130" fill="#fb923c" font-size="13" font-weight="700">2</text>
+            <text x="305" y="152" text-anchor="middle" fill="#fff" font-size="13.5" font-weight="600">Kickoff</text>
+            <text x="305" y="174" text-anchor="middle" fill="#9ca3af" font-size="12">~10 min</text>
+          </g>
+          <g>
+            <rect x="353" y="100" width="534" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="362" y="103" width="516" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="369" y="130" fill="#fb923c" font-size="13" font-weight="700">3</text>
+            <text x="620" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Build the core feature</text>
+            <text x="620" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">Get the one essential thing working &middot; ~60 min</text>
+          </g>
+          <g>
+            <rect x="893" y="100" width="264" height="92" rx="9" fill="#172234" stroke="rgba(249,115,22,.38)" stroke-width="1.4"/>
+            <rect x="902" y="103" width="246" height="4" rx="2" fill="url(#tlg)"/>
+            <text x="909" y="130" fill="#fb923c" font-size="13" font-weight="700">4</text>
+            <text x="1025" y="150" text-anchor="middle" fill="#fff" font-size="15" font-weight="600">Iterate</text>
+            <text x="1025" y="173" text-anchor="middle" fill="#9ca3af" font-size="12.5">See, decide, improve &middot; ~30 min</text>
+          </g>
+          <g stroke="#3a4658" stroke-width="1.5">
+            <line x1="80" y1="200" x2="80" y2="212"/>
+            <line x1="260" y1="200" x2="260" y2="212"/>
+            <line x1="350" y1="200" x2="350" y2="212"/>
+            <line x1="890" y1="200" x2="890" y2="212"/>
+            <line x1="1160" y1="200" x2="1160" y2="212"/>
+          </g>
+          <g fill="#9ca3af" font-size="12.5" font-weight="600">
+            <text x="80" y="232" text-anchor="middle">10:00</text>
+            <text x="260" y="232" text-anchor="middle">10:20</text>
+            <text x="350" y="232" text-anchor="middle">10:30</text>
+            <text x="890" y="232" text-anchor="middle">11:30</text>
+            <text x="1160" y="232" text-anchor="middle">12:00</text>
+          </g>
+        </svg>
       </div>
     </div>
     <div class="foot"><span>From idea to something real</span></div>
   </section>
 
-  <!-- 15 · STEP 1 -->
+  <!-- 15a · MASTER PROMPT WALKTHROUGH · PART 1 -->
   <section class="slide light">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 1 of 4</span>
+      <span class="tag">Build &middot; Master Prompt</span>
     </div>
     <div class="body">
-      <div class="split" style="align-items:center;">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
         <div>
-          <div class="stepflag r"><span class="bar"></span>Step 1 of 4</div>
-          <h2 class="r">Your Master Prompt &amp; User Flow</h2>
-          <div class="underline r"></div>
-          <p class="lead r">Set the foundation in plain words, we'll shape it together.</p>
-          <div class="challenge r">
-            <span class="ct">Your move now</span>
-            <p>Describe who it's for, the <b>one job</b> it does, and the path they take: open it &rarr; do the main thing &rarr; done.</p>
-          </div>
+          <div class="stepflag"><span class="bar"></span>Master Prompt &middot; Part 1 of 2</div>
+          <h2 style="font-size:32px;max-width:30ch;">Watch it done, step by step</h2>
         </div>
-        <div class="r">
-          <div class="shot" style="padding:18px;"><img src="user-flow-example.png" alt="A user flow example" /></div>
-          <div class="caption">A user flow: start &rarr; action &rarr; decision &rarr; the next step.</div>
+        <div class="caption" style="margin:0;max-width:30ch;text-align:right;flex:0 0 auto;">Play, pause, or scrub back anytime.</div>
+      </div>
+      <div class="vstage paused r">
+        <video src="master-prompt-1.mp4" poster="master-prompt-1.jpg" preload="metadata" playsinline muted></video>
+        <div class="vbar">
+          <button class="vbtn vtoggle" aria-label="Play or pause"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          <span class="vtime cur">0:00</span>
+          <div class="vseek"><div class="vseek-fill"></div><div class="vseek-knob"></div></div>
+          <span class="vtime dur">0:00</span>
+          <button class="vbtn vrestart" aria-label="Restart"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
         </div>
       </div>
     </div>
-    <div class="foot"><span>A clear flow makes a strong build</span></div>
+    <div class="foot"><span>How to write your Master Prompt &middot; Part 1</span></div>
   </section>
 
-  <!-- 16 · STEP 2 -->
-  <section class="slide panel">
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 2 of 4</span>
-    </div>
-    <div class="body">
-      <div class="split" style="align-items:center;">
-        <div>
-          <div class="stepflag r"><span class="bar"></span>Step 2 of 4</div>
-          <h2 class="r">Start your build partner</h2>
-          <div class="underline r"></div>
-          <p class="lead r">One command gets everything ready and opens your blank canvas.</p>
-          <div class="challenge r">
-            <span class="ct">Your move now</span>
-            <p>Type <b>/kickoff</b>, it prepares, checks and launches your starter, then shows you the app.</p>
-          </div>
-        </div>
-        <div class="r">
-          <div class="shot"><img src="blank-canvas.webp" alt="The blank Capgemini canvas" /></div>
-          <div class="caption">Your blank canvas, ready for your first idea.</div>
-        </div>
-      </div>
-    </div>
-    <div class="foot"><span>No setup, no jargon, just go</span></div>
-  </section>
-
-  <!-- 17 · STEP 3 -->
+  <!-- 15b · MASTER PROMPT WALKTHROUGH · PART 2 -->
   <section class="slide light">
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 3 of 4</span>
+      <span class="tag">Build &middot; Master Prompt</span>
     </div>
     <div class="body">
-      <div class="stepflag r"><span class="bar"></span>Step 3 of 4</div>
-      <h2 class="r">Build the core feature</h2>
-      <div class="underline r"></div>
-      <p class="lead r">Get the one essential thing working and visible on screen.</p>
-      <div class="challenge r">
-        <span class="ct">Your move now</span>
-        <p>Describe your <b>core feature</b> in plain words. Watch it appear, then try it for real.</p>
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Master Prompt &middot; Part 2 of 2</div>
+          <h2 style="font-size:32px;max-width:30ch;">Now bring it together</h2>
+        </div>
+        <div class="caption" style="margin:0;max-width:30ch;text-align:right;flex:0 0 auto;">Replay any part as many times as you need.</div>
+      </div>
+      <div class="vstage paused r">
+        <video src="master-prompt-2.mp4" poster="master-prompt-2.jpg" preload="metadata" playsinline muted></video>
+        <div class="vbar">
+          <button class="vbtn vtoggle" aria-label="Play or pause"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          <span class="vtime cur">0:00</span>
+          <div class="vseek"><div class="vseek-fill"></div><div class="vseek-knob"></div></div>
+          <span class="vtime dur">0:00</span>
+          <button class="vbtn vrestart" aria-label="Restart"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+        </div>
       </div>
     </div>
-    <div class="foot"><span>Smallest useful version first</span></div>
+    <div class="foot"><span>How to write your Master Prompt &middot; Part 2</span></div>
   </section>
 
-  <!-- 18 · STEP 4 -->
+  <!-- 16a · CODEX KICKOFF · STEP 1 -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 1 of 4</div>
+          <h2 style="font-size:32px;max-width:30ch;">Choose the approval mode</h2>
+        </div>
+        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum">2</span><span class="cxgap"></span><span class="cxnum">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
+      </div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-1.png" alt="Codex step 1 — choose the approval mode" /></div>
+    </div>
+    <div class="foot"><span>Decide how much Codex can do on its own</span></div>
+  </section>
+
+  <!-- 16b · CODEX KICKOFF · STEP 2 -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 2 of 4</div>
+          <h2 style="font-size:32px;max-width:30ch;">Select the Kickoff command</h2>
+        </div>
+        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
+      </div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-2.png" alt="Codex step 2 — select the Kickoff command" /></div>
+    </div>
+    <div class="foot"><span>Pick the Capgemini Vibe Coding Lab boilerplate</span></div>
+  </section>
+
+  <!-- 16c · CODEX KICKOFF · STEP 3 -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 3 of 4</div>
+          <h2 style="font-size:32px;max-width:30ch;">Run the kickoff command</h2>
+        </div>
+        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum on">3</span><span class="cxgap"></span><span class="cxnum">4</span></div>
+      </div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-3.png" alt="Codex step 3 — confirm project and branch" /></div>
+    </div>
+    <div class="foot"><span>Work locally, on the main branch</span></div>
+  </section>
+
+  <!-- 16d · CODEX KICKOFF · STEP 4 -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; Step 4 of 4</div>
+          <h2 style="font-size:32px;max-width:30ch;">Codex builds &amp; opens a preview</h2>
+        </div>
+        <div class="cxprog"><span class="cxnum on">1</span><span class="cxgap"></span><span class="cxnum on">2</span><span class="cxgap"></span><span class="cxnum on">3</span><span class="cxgap"></span><span class="cxnum on">4</span></div>
+      </div>
+      <div class="cxstage r"><img class="cxshot" src="codex-step-4.png" alt="Codex step 4 — Codex builds and opens a preview" /></div>
+    </div>
+    <div class="foot"><span>It installs, runs, checks, and shows your app</span></div>
+  </section>
+
+  <!-- 16b · CODEX KICKOFF · VIDEO (STEP 5) -->
+  <section class="slide light">
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Build &middot; Step 2 &middot; Codex kickoff</span>
+    </div>
+    <div class="body">
+      <div class="r" style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;">
+        <div>
+          <div class="stepflag"><span class="bar"></span>Codex kickoff &middot; in action</div>
+          <h2 style="font-size:32px;max-width:30ch;">The whole kickoff, end to end</h2>
+        </div>
+        <div class="caption" style="margin:0;max-width:30ch;text-align:right;flex:0 0 auto;">Play, pause, or scrub back anytime.</div>
+      </div>
+      <div class="vstage paused r">
+        <video src="codex-step5.mp4" poster="codex-step5.jpg" preload="metadata" playsinline muted></video>
+        <div class="vbar">
+          <button class="vbtn vtoggle" aria-label="Play or pause"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></button>
+          <span class="vtime cur">0:00</span>
+          <div class="vseek"><div class="vseek-fill"></div><div class="vseek-knob"></div></div>
+          <span class="vtime dur">0:00</span>
+          <button class="vbtn vrestart" aria-label="Restart"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>From first prompt to a live preview</span></div>
+  </section>
+
+  <!-- 17 · BUILD → LOOP (core feature + iterate, combined) -->
   <section class="slide hero">
     <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Build &middot; Step 4 of 4</span>
+      <span class="tag">Build &middot; The loop</span>
     </div>
-    <div class="body">
-      <div class="stepflag r"><span class="bar"></span>Step 4 of 4</div>
-      <h1 class="r" style="font-size:60px;">Improve, loop, repeat</h1>
-      <p class="lead r">The rhythm of the whole afternoon: see it, decide, ask for the next thing.</p>
-      <div class="challenge r">
-        <span class="ct">Your move now</span>
-        <p>See it &rarr; decide what's next &rarr; ask for it. Keep looping until it's truly yours.</p>
+    <div class="body" style="justify-content:center;">
+      <h2 class="r" style="text-align:center;max-width:none;font-size:40px;">Build it. Then loop.</h2>
+      <div class="loopwrap r">
+        <svg viewBox="0 0 1100 350" role="img" aria-label="Flowchart: Build it, See it run, Good enough? If no, ask for the next thing and loop back; if yes, Ship it">
+          <defs>
+            <marker id="afwd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a97a8"/></marker>
+            <marker id="aloop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f97316"/></marker>
+          </defs>
+          <path d="M235 150 H319" fill="none" stroke="#8a97a8" stroke-width="2" marker-end="url(#afwd)"/>
+          <path d="M505 150 H589" fill="none" stroke="#8a97a8" stroke-width="2" marker-end="url(#afwd)"/>
+          <path d="M773 150 H857" fill="none" stroke="#8a97a8" stroke-width="2" marker-end="url(#afwd)"/>
+          <text x="816" y="140" text-anchor="middle" fill="#9ca3af" font-size="12.5" font-weight="600">Yes</text>
+          <path d="M685 208 V300 H145 V182" fill="none" stroke="#f97316" stroke-width="2.4" marker-end="url(#aloop)"/>
+          <rect x="298" y="287" width="234" height="26" rx="7" fill="#0e1521" stroke="#1f2937"/>
+          <text x="415" y="304" text-anchor="middle" font-size="12.5"><tspan fill="#fb923c" font-weight="700">No</tspan><tspan fill="#cbd5e1"> &mdash; ask for the next thing</tspan></text>
+          <g>
+            <rect x="55" y="118" width="180" height="64" rx="9" fill="#1f2937" stroke="#3a4658" stroke-width="1.5"/>
+            <text x="145" y="156" text-anchor="middle" fill="#fff" font-size="17" font-weight="500">Build it</text>
+          </g>
+          <g>
+            <rect x="325" y="118" width="180" height="64" rx="9" fill="#1f2937" stroke="#3a4658" stroke-width="1.5"/>
+            <text x="415" y="156" text-anchor="middle" fill="#fff" font-size="17" font-weight="500">See it run</text>
+          </g>
+          <g>
+            <polygon points="685,92 773,150 685,208 597,150" fill="#1f2937" stroke="#f97316" stroke-width="1.8"/>
+            <text x="685" y="155" text-anchor="middle" fill="#fff" font-size="15.5" font-weight="500">Good enough?</text>
+          </g>
+          <g>
+            <rect x="865" y="118" width="175" height="64" rx="9" fill="rgba(249,115,22,.16)" stroke="#f97316" stroke-width="1.6"/>
+            <text x="952" y="156" text-anchor="middle" fill="#fff" font-size="17" font-weight="600">Ship it</text>
+          </g>
+        </svg>
       </div>
-      <p class="lead r" style="margin-top:22px;font-weight:400;color:#fff;">So, what will you build?</p>
+      <p class="lead r" style="text-align:center;margin-top:4px;color:#fff;font-weight:400;">So &mdash; what will you build?</p>
     </div>
     <div class="foot"><span>Capgemini &times; IQ &middot; AI Product Crafting Lab</span></div>
+  </section>
+
+  <!-- 17b · WANT THE SLIDES -->
+  <section class="slide hero">
+    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
+    <div class="top">
+      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
+      <span class="tag">Take it with you</span>
+    </div>
+    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
+      <h2 class="r" style="max-width:none;">Want the slides?</h2>
+      <div class="bigcmd r"><span class="sl">/</span>slides<span class="cur"></span></div>
+      <div class="shot r" style="max-width:680px;"><img src="slides-cmd.png" alt="Typing /slides in Codex to open the lab slides" /></div>
+      <p class="caption r" style="margin-top:16px;">Type it in Codex to reopen this deck anytime.</p>
+    </div>
+    <div class="foot"><span>Yours to keep &middot; the whole deck, one command away</span></div>
+  </section>
+
+  <!-- 18 · LIVE CHALLENGE TIMER -->
+  <section class="slide hero timer-slide">
+    <div class="tbg tbg1"></div>
+    <div class="tbg tbg2"></div>
+    <div class="body" style="justify-content:center;">
+      <div class="timerwrap r">
+        <div class="logo-chip biglogo"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></div>
+        <span class="kicker" style="margin-bottom:10px;">Time to build</span>
+        <div class="bigclock" id="bigClock">--:--</div>
+        <div class="clocksub" id="clockSub">until 12:00</div>
+        <div class="tprog">
+          <div class="tprog-head"><span>10:00 AM &middot; start</span><span class="mid" id="tprogMid">&nbsp;</span><span>12:00 PM &middot; finish</span></div>
+          <div class="tprog-track"><div class="tprog-fill" id="tprogFill"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>Hands on the keyboard until noon</span></div>
   </section>
 
 <div class="counter" id="counter">01 / 23</div>
@@ -938,16 +1208,66 @@
   const dots=[...dotsWrap.children];
   const pad=n=>String(n).padStart(2,'0');
 
+  // Subtle custom video players
+  function fmtTime(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
+  function initVideos(){
+    document.querySelectorAll('.vstage').forEach(p=>{
+      const v=p.querySelector('video');
+      const fill=p.querySelector('.vseek-fill'), knob=p.querySelector('.vseek-knob'), seek=p.querySelector('.vseek');
+      const cur=p.querySelector('.vtime.cur'), dur=p.querySelector('.vtime.dur');
+      const setState=on=>{p.classList.toggle('playing',on);p.classList.toggle('paused',!on);};
+      const toggle=()=>{ v.paused ? v.play() : v.pause(); };
+      v.addEventListener('play',()=>setState(true));
+      v.addEventListener('pause',()=>setState(false));
+      v.addEventListener('ended',()=>setState(false));
+      v.addEventListener('loadedmetadata',()=>{dur.textContent=fmtTime(v.duration);});
+      v.addEventListener('timeupdate',()=>{const pct=v.duration?(v.currentTime/v.duration):0;fill.style.width=(pct*100)+'%';knob.style.left=(pct*100)+'%';cur.textContent=fmtTime(v.currentTime);});
+      p.querySelector('.vtoggle').addEventListener('click',toggle);
+      v.addEventListener('click',toggle);
+      p.querySelector('.vrestart').addEventListener('click',()=>{v.currentTime=0;v.play();});
+      let dragging=false;
+      const scrub=e=>{const r=seek.getBoundingClientRect();let x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width;x=Math.min(1,Math.max(0,x));if(v.duration)v.currentTime=x*v.duration;};
+      seek.addEventListener('mousedown',e=>{dragging=true;scrub(e);e.preventDefault();});
+      window.addEventListener('mousemove',e=>{if(dragging)scrub(e);});
+      window.addEventListener('mouseup',()=>{dragging=false;});
+      seek.addEventListener('click',scrub);
+    });
+  }
+
   function render(){
-    slides.forEach((s,idx)=>{s.classList.toggle('active',idx===i);s.classList.toggle('prev',idx<i);});
+    slides.forEach((s,idx)=>{s.classList.toggle('active',idx===i);s.classList.toggle('prev',idx<i);
+      if(idx!==i){s.querySelectorAll('video').forEach(v=>{if(!v.paused)v.pause();});}});
     dots.forEach((d,idx)=>d.classList.toggle('on',idx===i));
     progress.style.width=((i+1)/total*100)+'%';
     counter.textContent=pad(i+1)+' / '+pad(total);
     prevBtn.disabled=i===0;nextBtn.disabled=i===total-1;
+    deck.classList.toggle('isvideo',slides[i].classList.contains('vidfull'));
     counter.style.color=slides[i].classList.contains('hero')?'rgba(255,255,255,.6)':'rgba(148,163,184,.75)';
   }
-  function go(n){i=Math.max(0,Math.min(total-1,n));render();}
-  const next=()=>go(i+1), prev=()=>go(i-1);
+  // Interactive "brief in action" — reveal & settle one row per click
+  // Each part takes two clicks: 1) reveal it large, 2) settle to normal size.
+  const briefRows=[...document.querySelectorAll('.brief2 .row')];
+  const BRIEF_N=briefRows.length;
+  const BRIEF_MAX=BRIEF_N*2;
+  const briefHint=document.getElementById('briefHint');
+  let briefIdx=[...slides].findIndex(s=>s.querySelector('.brief2'));
+  let bStep=0;
+  function briefShow(){
+    briefRows.forEach((r,p)=>{
+      r.classList.toggle('show', bStep >= 2*p+1);
+      r.classList.toggle('big', bStep === 2*p+1);
+    });
+    if(briefHint) briefHint.style.opacity = bStep>=BRIEF_MAX ? '0' : '1';
+  }
+  function go(n){
+    const pv=i;
+    i=Math.max(0,Math.min(total-1,n));
+    if(i===briefIdx && pv!==briefIdx){ bStep = pv>i ? BRIEF_MAX : 0; }
+    render();
+    if(i===briefIdx) briefShow();
+  }
+  function next(){ if(i===briefIdx && bStep<BRIEF_MAX){ bStep++; briefShow(); return; } go(i+1); }
+  function prev(){ if(i===briefIdx && bStep>0){ bStep--; briefShow(); return; } go(i-1); }
   nextBtn.addEventListener('click',next);
   prevBtn.addEventListener('click',prev);
   document.addEventListener('keydown',e=>{
@@ -965,6 +1285,30 @@
     else { if(Math.abs(dy)>40){dy<0?next():prev();} }
     sx=sy=null;
   });
+  // Live challenge clock — fills from 10:00 to 12:00 (noon), any day
+  function fmt2(n){return String(n).padStart(2,'0');}
+  function updateTimer(){
+    const el=document.getElementById('bigClock'); if(!el) return;
+    const now=new Date();
+    var hr=now.getHours(), ap=hr<12?'AM':'PM', h12=hr%12||12;
+    el.innerHTML=h12+':'+fmt2(now.getMinutes())+'<span class="ap">'+ap+'</span>';
+    const start=new Date(now); start.setHours(10,0,0,0);
+    const end=new Date(now); end.setHours(12,0,0,0);
+    const fill=document.getElementById('tprogFill'), sub=document.getElementById('clockSub'), mid=document.getElementById('tprogMid');
+    if(now<start){ fill.style.width='0%'; sub.innerHTML='Starts at <b>10:00 AM</b>'; if(mid)mid.textContent='0%'; }
+    else if(now>=end){ fill.style.width='100%'; sub.innerHTML="<b>Time's up!</b> Hands off the keyboard."; if(mid)mid.textContent='Done'; }
+    else {
+      const pct=(now-start)/(end-start);
+      fill.style.width=(pct*100).toFixed(2)+'%';
+      const rem=end-now, rh=Math.floor(rem/3600000), rm=Math.floor((rem%3600000)/60000), rs=Math.floor((rem%60000)/1000);
+      sub.innerHTML = rh>0 ? ('<b>'+rh+'h '+fmt2(rm)+'m</b> left until noon') : ('<b>'+Math.ceil(rem/60000)+'m</b> left until noon');
+      if(mid)mid.textContent=Math.round(pct*100)+'%';
+    }
+  }
+  setInterval(updateTimer,1000);
+  updateTimer();
+
+  initVideos();
   render();
 </script>
 </body>
