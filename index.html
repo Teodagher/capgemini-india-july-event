@@ -265,6 +265,10 @@
   .slide.graphfocus .split>div:first-child{opacity:.08;filter:blur(2px);pointer-events:none;
     transition:opacity .5s ease, filter .5s ease;}
   .slide.graphfocus .caption{opacity:0;transition:opacity .4s ease;}
+  /* Looping kickoff banner video — full width, low height, no controls */
+  .kickvid{width:100%;max-width:1040px;margin-top:20px;}
+  .kickvid video{width:100%;height:auto;display:block;border-radius:14px;
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 34px 80px -32px rgba(0,0,0,.65);}
   /* Full-bleed vector-space image slide */
   .vspace{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;}
   .vspace img{max-width:min(1080px,94%);max-height:680px;object-fit:contain;border-radius:16px;
@@ -904,20 +908,20 @@
     <div class="foot"><span>From idea to something real</span></div>
   </section>
 
-  <!-- 15pre · MASTER PROMPT COMMAND -->
+  <!-- 15pre · KICK OFF IN THE BACKGROUND -->
   <section class="slide hero">
     <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
     <div class="top">
       <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Step 1 &middot; Master Prompt</span>
+      <span class="tag">Step 1 &middot; Kick it off</span>
     </div>
     <div class="body" style="justify-content:center;align-items:center;text-align:center;">
-      <h2 class="r" style="max-width:none;">Let's write your Master Prompt</h2>
-      <div class="bigcmd r"><span class="sl">/</span>masterprompt<span class="cur"></span></div>
-      <div class="shot r" style="max-width:680px;"><img src="masterprompt-cmd.png" alt="Typing /masterprompt in Codex to open the Master Prompt maker" /></div>
-      <p class="caption r" style="margin-top:16px;">Type it in Codex to open the Master Prompt maker.</p>
+      <h2 class="r" style="max-width:none;">Start it building in the background</h2>
+      <div class="bigcmd r"><span class="sl">/</span>kickoff<span class="cur"></span></div>
+      <p class="lead r" style="max-width:62ch;margin-top:4px;">Open Codex and run <b>/kickoff</b> right now. It sets your whole project up in the background <b>while you write your Master Prompt</b> &mdash; so it's ready the moment you are.</p>
+      <div class="kickvid r"><video src="kickoff.mp4" class="autoloop" autoplay loop muted playsinline></video></div>
     </div>
-    <div class="foot"><span>Describe who it's for and the one job it does</span></div>
+    <div class="foot"><span>Let it work while you think &middot; then bring your Master Prompt</span></div>
   </section>
 
   <!-- 15a · MASTER PROMPT WALKTHROUGH · PART 1 -->
@@ -1125,22 +1129,6 @@
     <div class="foot"><span>Capgemini &times; IQ &middot; AI Product Crafting Lab</span></div>
   </section>
 
-  <!-- 17b · WANT THE SLIDES -->
-  <section class="slide hero">
-    <div class="motif-2"><svg viewBox="0 0 600 600"><path d="M300 40C200 140 60 200 60 360c0 130 110 200 240 200s240-70 240-200C540 200 400 140 300 40z" fill="rgba(249,115,22,.08)"/></svg></div>
-    <div class="top">
-      <div class="brand"><span class="logo-chip"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></span></div>
-      <span class="tag">Take it with you</span>
-    </div>
-    <div class="body" style="justify-content:center;align-items:center;text-align:center;">
-      <h2 class="r" style="max-width:none;">Want the slides?</h2>
-      <div class="bigcmd r"><span class="sl">/</span>slides<span class="cur"></span></div>
-      <div class="shot r" style="max-width:680px;"><img src="slides-cmd.png" alt="Typing /slides in Codex to open the lab slides" /></div>
-      <p class="caption r" style="margin-top:16px;">Type it in Codex to reopen this deck anytime.</p>
-    </div>
-    <div class="foot"><span>Yours to keep &middot; the whole deck, one command away</span></div>
-  </section>
-
   <!-- 18 · LIVE CHALLENGE TIMER -->
   <section class="slide hero timer-slide">
     <div class="tbg tbg1"></div>
@@ -1283,6 +1271,7 @@
   function render(){
     slides.forEach((s,idx)=>{s.classList.toggle('active',idx===i);s.classList.toggle('prev',idx<i);
       if(idx!==i){s.querySelectorAll('video').forEach(v=>{if(!v.paused)v.pause();});}});
+    slides[i].querySelectorAll('video.autoloop').forEach(v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{});});
     dots.forEach((d,idx)=>d.classList.toggle('on',idx===i));
     progress.style.width=((i+1)/total*100)+'%';
     counter.textContent=pad(i+1)+' / '+pad(total);
