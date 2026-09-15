@@ -792,7 +792,7 @@
       <span class="kicker r">Two hours &middot; four steps &middot; one working product</span>
       <h1 class="r" style="margin:6px 0 0;font-size:58px;">Let's build</h1>
       <div class="tlwrap r">
-        <svg viewBox="0 0 1240 250" role="img" aria-label="Two-hour build timeline from 10:00 to 12:00: Codex setup 5 minutes, Master Prompt and Flow, Build the core feature 60 minutes, Iterate 30 minutes">
+        <svg viewBox="0 0 1240 250" role="img" aria-label="Two-hour build timeline from 14:00 to 16:00: Codex setup 5 minutes, Master Prompt and Flow, Build the core feature 60 minutes, Iterate 30 minutes">
           <defs>
             <linearGradient id="tlg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
           </defs>
@@ -832,11 +832,11 @@
             <line x1="1160" y1="200" x2="1160" y2="212"/>
           </g>
           <g fill="#9ca3af" font-size="12.5" font-weight="600">
-            <text x="80" y="232" text-anchor="middle">10:00</text>
-            <text x="210" y="232" text-anchor="middle">10:05</text>
-            <text x="470" y="232" text-anchor="middle">10:30</text>
-            <text x="880" y="232" text-anchor="middle">11:30</text>
-            <text x="1160" y="232" text-anchor="middle">12:00</text>
+            <text x="80" y="232" text-anchor="middle">14:00</text>
+            <text x="210" y="232" text-anchor="middle">14:05</text>
+            <text x="470" y="232" text-anchor="middle">14:30</text>
+            <text x="880" y="232" text-anchor="middle">15:30</text>
+            <text x="1160" y="232" text-anchor="middle">16:00</text>
           </g>
         </svg>
       </div>
@@ -1049,11 +1049,11 @@
       <div class="tl-left r">
         <div class="tl-kicker">Today's flow</div>
         <ol class="tl-steps">
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Codex setup &amp; <b>/kickoff</b></span><span class="tl-time">10:00 &middot; ~5 min</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Master Prompt &amp; Flow &mdash; chat it through</span><span class="tl-time">10:05 &rarr; 10:30 &middot; up to 30 min</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Paste the Master Prompt &amp; wait for the first preview</span><span class="tl-time">10:30</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Build the core feature</span><span class="tl-time">10:30 &rarr; 11:30</span></div></li>
-          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Reiterate until you're satisfied</span><span class="tl-time">11:30 &rarr; 12:00</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Codex setup &amp; <b>/kickoff</b></span><span class="tl-time">14:00 &middot; ~5 min</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Master Prompt &amp; Flow &mdash; chat it through</span><span class="tl-time">14:05 &rarr; 14:30 &middot; up to 30 min</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Paste the Master Prompt &amp; wait for the first preview</span><span class="tl-time">14:30</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Build the core feature</span><span class="tl-time">14:30 &rarr; 15:30</span></div></li>
+          <li><span class="tl-dot"></span><div class="tl-c"><span class="tl-t">Reiterate until you're satisfied</span><span class="tl-time">15:30 &rarr; 16:00</span></div></li>
         </ol>
         <div class="tl-coaches">
           <div class="tl-coaches-lbl">Your coaches &middot; call us anytime</div>
@@ -1067,14 +1067,14 @@
         <div class="logo-chip biglogo"><img class="cap" src="capgemini-wordmark.png" alt="Capgemini" /><span class="divider"></span><img class="iq" src="iq-badge.png" alt="IQ Project" /></div>
         <span class="kicker" style="margin-bottom:10px;">Time to build</span>
         <div class="bigclock" id="bigClock">--:--</div>
-        <div class="clocksub" id="clockSub">until 12:00</div>
+        <div class="clocksub" id="clockSub">until 16:00</div>
         <div class="tprog">
-          <div class="tprog-head"><span>10:00 AM &middot; start</span><span class="mid" id="tprogMid">&nbsp;</span><span>12:00 PM &middot; finish</span></div>
+          <div class="tprog-head"><span>14:00 &middot; start</span><span class="mid" id="tprogMid">&nbsp;</span><span>16:00 &middot; finish</span></div>
           <div class="tprog-track"><div class="tprog-fill" id="tprogFill"></div></div>
         </div>
       </div>
     </div>
-    <div class="foot"><span>Hands on the keyboard until noon</span></div>
+    <div class="foot"><span>Hands on the keyboard until 16:00</span></div>
   </section>
 
   <!-- 26 · CLOSING — THE GOAL OF THIS LAB -->
@@ -1354,23 +1354,22 @@
     else { if(Math.abs(dy)>40){dy<0?next():prev();} }
     sx=sy=null;
   });
-  // Live challenge clock — fills from 10:00 to 12:00 (noon), any day
+  // Live challenge clock — fills from 14:00 to 16:00, any day
   function fmt2(n){return String(n).padStart(2,'0');}
   function updateTimer(){
     const el=document.getElementById('bigClock'); if(!el) return;
     const now=new Date();
-    var hr=now.getHours(), ap=hr<12?'AM':'PM', h12=hr%12||12;
-    el.innerHTML=h12+':'+fmt2(now.getMinutes())+'<span class="ap">'+ap+'</span>';
-    const start=new Date(now); start.setHours(10,0,0,0);
-    const end=new Date(now); end.setHours(12,0,0,0);
+    el.innerHTML=fmt2(now.getHours())+':'+fmt2(now.getMinutes());
+    const start=new Date(now); start.setHours(14,0,0,0);
+    const end=new Date(now); end.setHours(16,0,0,0);
     const fill=document.getElementById('tprogFill'), sub=document.getElementById('clockSub'), mid=document.getElementById('tprogMid');
-    if(now<start){ fill.style.width='0%'; sub.innerHTML='Starts at <b>10:00 AM</b>'; if(mid)mid.textContent='0%'; }
+    if(now<start){ fill.style.width='0%'; sub.innerHTML='Starts at <b>14:00</b>'; if(mid)mid.textContent='0%'; }
     else if(now>=end){ fill.style.width='100%'; sub.innerHTML="<b>Time's up!</b> Hands off the keyboard."; if(mid)mid.textContent='Done'; }
     else {
       const pct=(now-start)/(end-start);
       fill.style.width=(pct*100).toFixed(2)+'%';
       const rem=end-now, rh=Math.floor(rem/3600000), rm=Math.floor((rem%3600000)/60000), rs=Math.floor((rem%60000)/1000);
-      sub.innerHTML = rh>0 ? ('<b>'+rh+'h '+fmt2(rm)+'m</b> left until noon') : ('<b>'+Math.ceil(rem/60000)+'m</b> left until noon');
+      sub.innerHTML = rh>0 ? ('<b>'+rh+'h '+fmt2(rm)+'m</b> left until 16:00') : ('<b>'+Math.ceil(rem/60000)+'m</b> left until 16:00');
       if(mid)mid.textContent=Math.round(pct*100)+'%';
     }
   }
